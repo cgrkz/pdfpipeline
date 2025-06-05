@@ -1,0 +1,354 @@
+[
+  {
+    "page_num": 1,
+    "caption": "A hand points towards a blue circular screen displaying \"SOFTWARE TESTING\" with eight icons, including a laptop, circuit board, lightbulb, brain, headphones, and laptop..  The image shows a person's hand pointing at a screen displaying the word \"SOFTWARE TESTING\" in a circular frame. The hand is positioned in front of a digital display with a blue background and various icons related to software testing. These icons include a laptop, a person with a headset, a lightbulb, a gear, a graph, a laptop, a person with a headset, a lightbulb, a gear, a laptop, a person with a headset, a gear, a graph, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with a headset, a gear, a laptop, a person with"
+  },
+  {
+    "page_num": 1,
+    "caption": "The \"module5\" logo, featuring a purple rectangle with white text, is displayed against a white background..  The image features a purple rectangular sign with the text \"module5\" prominently displayed in white letters. The sign is positioned against a white background, making the purple color stand out."
+  },
+  {
+    "page_num": 3,
+    "caption": "A blue collared shirt with 2 sleeves, size L, blue buttons, and a date-like appearance is shown, accompanied by a list of questions for verification..  The image presents a blue dress shirt with a collar, long sleeves, and buttons. It is shown in a folded state, and the shirt appears to be made of a cotton fabric. The shirt is displayed against a white background, and there are four questions posed to the viewer, each asking about the shirt's attributes: size, color, buttons, and date suitability. The questions are presented in a list format, with each question accompanied by a checkbox next to it. The shirt is shown in a light blue color, and it appears to be in good condition."
+  },
+  {
+    "page_num": 4,
+    "caption": "A cartoon man in a white shirt and blue tie evaluates a product's final end product, using a laptop and a checklist of verification and validation techniques..  A cartoon man in a suit and tie, a computer monitor, and a checklist"
+  },
+  {
+    "page_num": 6,
+    "caption": "A spiral diagram illustrates the stages of System Testing, Validation testing, Integration testing, Unit testing, Code, Design, Requirements, and System engineering..  The image presents a spiral diagram illustrating the different stages of software development. The spiral is divided into concentric circles, each representing a specific testing or integration stage. The stages are System testing, Validation testing, Integration testing, Unit testing, Code, Design requirements, System engineering, and System testing. A line is drawn through the center of the spiral, indicating the flow of the software development process."
+  },
+  {
+    "page_num": 12,
+    "caption": "A software testing hierarchy, divided into Manual Testing, Automation Testing, Functional Testing, Non-Functional Testing, Performance Testing, Usability Testing, Compatibility Testing, Incremental Testing, Non-Incremental Testing, System Testing, Load Testing, Stress Testing, Scalability Testing, Stability Testing, and Top-down, Bottom-up testing, with subcategories within each..  The image presents a hierarchical structure of software testing types, categorized into Manual Testing, Automation Testing, Functional Testing, Non-Functional Testing, System Testing, Performance Testing, Usability Testing, Compatibility Testing, Load Testing, Stress Testing, Scalability Testing, Stability Testing, Incremental Testing, Non-Incremental Testing, Top-down Testing, Bottom-up Testing, White Box, Black Box, Grey Box, Integration Testing, System Testing, Performance Testing, Usability Testing, Compatibility Testing"
+  },
+  {
+    "page_num": 13,
+    "caption": "A feedback loop connects a developer to a tester or developer, with a laptop displaying code and a magnifying glass for review..  The image shows a flowchart illustrating the process of writing code and testing a software application. It depicts a feedback loop between a developer and a tester or developer. The developer writes code, which is then reviewed by the tester or developer. The feedback loop shows the developer's code being reviewed, and the tester or developer providing feedback. The feedback loop is represented by arrows, indicating the cyclical nature of the process."
+  },
+  {
+    "page_num": 14,
+    "caption": "Three boxes labeled \"Black Box Testing,\" \"White Box Testing,\" and \"Grey Box Testing\" are shown with a plus sign, indicating internal functionality is unknown..  The image presents a visual representation of three different testing methods: Black Box Testing, White Box Testing, and Grey Box Testing. Each method is represented by a box, with the boxes being colored and labeled accordingly.\n\nThe Black Box Testing method is shown with a dark blue box, indicating that the internal functionality is unknown. The White Box Testing method is represented with a white box, indicating that internal functionality is known. The Grey Box Testing method is shown with a grey box, indicating that internal functionality is partially known.\n\nThe boxes are placed next to each other, with the addition of a plus sign (+) symbol between them, symbolizing the sum of the three testing methods. The text \"Internal functionality is unknown\" is present at the bottom of the image, providing context for each testing method."
+  },
+  {
+    "page_num": 14,
+    "caption": "Three diamond-shaped boxes labeled \"White box Testing,\" \"Black box Testing,\" and \"Gray box Testing\" are arranged in a triangular formation, each with a unique color and text..  The image presents a visual representation of the types of manual testing. It features three distinct color-coded diamond shapes, each labeled with a different type of manual testing: White box testing, Black box testing, and Gray box testing. The diamond shapes are arranged in a row, with each color representing a specific type of manual testing. The text above the diamond shapes clearly states \"Types of Manual Testing.\""
+  },
+  {
+    "page_num": 15,
+    "caption": "A blue cube labeled \"Application Code\" with a network diagram and two pink speech bubbles labeled \"Test Case Input\" and \"Test Case Output\" is shown..  The image shows a blue box labeled \"Application Code\" with a flowchart diagram on its front. The flowchart illustrates the process of testing a software application, including input, test case input, test case output, and the application code itself. The flowchart includes various nodes, such as hexagons, circles, and squares, representing different stages of the testing process. Arrows indicate the direction of the flow, highlighting the sequence of steps involved in the testing process."
+  },
+  {
+    "page_num": 16,
+    "caption": "A black cardboard box with a white label and a black stripe sits on a white surface, accompanied by the text \"Black box - we do not know anything.\".  The image shows a black box with a white label on it. The box is sitting on a white surface, and there is a shadow cast by the box. The text \"Black box – we do not know anything\" is written in black at the bottom of the image."
+  },
+  {
+    "page_num": 16,
+    "caption": "The QA tester logo, featuring the letters \"QA\" in black against a white background, is centered and bold..  The image contains the text \"QA testers\" in a sans-serif font."
+  },
+  {
+    "page_num": 16,
+    "caption": "A black cube labeled \"Black Box Testing\" is surrounded by a person with question marks, indicating a testing process..  The image shows a black box labeled \"Black Box Testing\" with an arrow pointing to it. There is also a person with question marks above their head, suggesting confusion or uncertainty about the Black Box Testing process. The person is standing in front of the box, and the question marks indicate that they are unsure or have questions about the testing process."
+  },
+  {
+    "page_num": 19,
+    "caption": "A mobile number entry form displays a light blue box for entering a ten-digit mobile number, with \"Enter Ten Digit Mobile Number\" and \"Submit\" buttons..  The image shows a mobile number entry form with a purple background. The form has a light blue box in the center, which contains the instruction \"Enter Ten Digit Mobile Number.\" There are two buttons on either side of the box: a \"Submit\" button on the right and a \"Back\" button on the left."
+  },
+  {
+    "page_num": 19,
+    "caption": "A table displays the results of a test case, categorizing it as invalid (digits >-11), invalid (digits <-9), valid (digits =10), and valid (digits =10)..  The image shows a table with four columns labeled \"INVALID,\" \"INVALID,\" \"VALID,\" and \"VALID.\" Each column represents a different number of test cases: 1, 2, 3, and 4. The table displays the number of test cases for each invalid case: 9384726219, 984543985, 9991456234, and 9893451483. The \"INVALID\" column shows that there are more than 9 test cases for each invalid case."
+  },
+  {
+    "page_num": 20,
+    "caption": "A timeline shows the progression of a project, with \"Invalid partition\" at $78, \"Valid partition\" at $140, \"Valid partition (20%)\" at $370, and \"Valid partition (30%)\" at $530..  The image presents a timeline of four stages in a process, labeled as \"Invalid partition,\" \"Valid partition (10%), Valid partition (20%), and Valid partition (30%).\" Each stage is represented by a red rectangle with a corresponding dollar amount. The stages are:\n\n1. Invalid partition: $78\n2. Invalid partition (10%)\n3. Valid partition (20%)\n4. Valid partition (30%)"
+  },
+  {
+    "page_num": 21,
+    "caption": "An orange line labeled \"a\" connects two orange circles labeled \"x(min)\" and \"x(max)\", with an arrow labeled \"b\" pointing to the right..  The image shows a diagram with a horizontal line labeled \"x\" and two circles labeled \"a\" and \"b.\" The line \"x\" is connected to the two circles, and the circles are positioned at the ends of the line. The line \"x\" is labeled \"b,\" indicating a transition or connection between the two circles. The diagram appears to represent a sequence or progression, with the circles labeled \"a\" and \"b\" and the line \"x\" representing a transition or connection point."
+  },
+  {
+    "page_num": 22,
+    "caption": "A table displays the results of three password conditions: Email (condition1), Password (condition2), and Expected Result (Action)..  The image shows a table with three columns: Email (condition1), Password (condition2), and Expected Result (Action). Each column has a \"T\" in the top left corner, indicating that the condition is true. The expected result is that the email is correct, the password is correct, and the email is incorrect."
+  },
+  {
+    "page_num": 23,
+    "caption": "A transition diagram illustrates a state change process, with input and output states, an event, and a transition arrow indicating a change from State 1 to State 2..  The image displays a flowchart illustrating a transition process. It shows two states, State 1 and State 2, with an event occurring between them. The event is represented by a blue rectangle labeled \"Event Action.\" The flowchart also includes an input and output, with an oval labeled \"Transition\" at the top. The flowchart visually represents the transition between the two states, highlighting the event and its action."
+  },
+  {
+    "page_num": 24,
+    "caption": "A diagram illustrates a sequence of events: a user attempts to log in, fails, attempts again, and succeeds, with a \"Account Locked\" button at the end..  The image shows a flowchart illustrating the process of unlocking an account. It has three main sections: Start, Attempt Failed, and Success. The Start section shows a pin labeled \"Start,\" indicating the beginning of the process. The Attempt Failed section shows a pin labeled \"1st Attempt Failed,\" indicating a failed attempt. The Success section shows a pin labeled \"Success,\" indicating a successful unlocking of the account. The Account Locked section shows a pin labeled \"Account Locked,\" indicating that the account has been successfully unlocked."
+  },
+  {
+    "page_num": 25,
+    "caption": "A login screen with a valid credentials check and error message is shown, transitioning to a welcome screen with a login screen and logout button..  The image shows a flowchart illustrating the login process. It consists of three states: State 1 (Login Screen), State 2 (Logout), and State 3 (Error Message). The login screen is represented by a blue rectangle labeled \"Login Screen,\" and the login process involves entering credentials. The error message is displayed in a blue rectangle labeled \"Error Message.\" The login screen and the login process are connected to the error message, indicating that the login process may fail due to an error."
+  },
+  {
+    "page_num": 27,
+    "caption": "A 3x3 grid displays twelve squares, each representing a different quality: Security, Availability, Efficiency, Integrity, Reliability, Survivability, Usability, Flexibility, Scalability, Reusability, Interoperability, and Portability..  The image presents a grid of twelve squares, each containing a different characteristic or quality. The squares are arranged in a 4x3 grid, with each row representing a different quality: Security, Availability, Efficiency, Integrity, Reliability, Survivability, Usability, Flexibility, Scalability, Reusability, Interoperability, and Portability."
+  },
+  {
+    "page_num": 28,
+    "caption": "A 3D diagram illustrates the levels of testing, from Unit Testing to System Testing, with acceptance testing at the final stage..  The image presents a step-by-step process of levels of testing, labeled as 1, 2, 3, and 4. It shows a progression from unit testing to acceptance testing, with each level building upon the previous one. The steps are visually represented by a stepped pyramid shape, with each level distinctively colored. The color-coded steps help to differentiate between the stages and facilitate understanding of the testing process."
+  },
+  {
+    "page_num": 28,
+    "caption": "A pyramid-shaped diagram illustrates the stages of software development, from acceptance testing to end user testing, with integration testing and end user testing at the top..  The image presents a pyramid-shaped diagram illustrating the different stages of software testing. The pyramid is divided into four levels, each representing a specific testing stage: Acceptance Testing, System Testing, Integration Testing, and End User Testing.\n\nThe pyramid is divided into four sections, each representing a different testing stage. The topmost section is labeled \"End User Testing,\" indicating the final stage of testing before the software is released to the public. The bottom section is labeled \"Dev,\" signifying the development stage.\n\nThe pyramid is visually represented with arrows indicating the flow of testing process. The arrows start at the top of the pyramid, moving downwards to the Integration Testing stage, then to the System Testing stage, and finally to the End User Testing stage. The icons of testers and end users are placed at the top and bottom of the pyramid, respectively, signifying the roles of testers and end users in the testing process."
+  },
+  {
+    "page_num": 30,
+    "caption": "A unit testing setup for a banking application, with a server, module, and transaction buttons, and a table for account transfer and cancellation..  The image contains a diagram illustrating unit testing, specifically focusing on the transfer of account numbers between a Fan and a Tan account. The diagram shows the components of the transfer process, including the Fan, Tan, and the transfer button. The transfer button is highlighted, and the description of the transfer button includes entering valid Fan and Tan values, valid Tan value, and entering correct amount. The transfer button is clickable, and the cancel button is also present. The diagram also shows the account number accepted, account number invalid, blank, and block account."
+  },
+  {
+    "page_num": 31,
+    "caption": "Three blue spheres labeled \"Module A\", \"Module B\", and \"Module C\" are arranged in a triangular formation, with \"Module A\" and \"Module B\" under \"Tested in Unit Testing\" and \"Module C\" under \"Under Integration Testing\"..  The image displays a diagram with three overlapping circles representing different modules: Module A, Module B, and Module C. Each module is labeled with its name. The circles are arranged in a way that they overlap, indicating a testing process. The text \"Tested in Unit Testing\" is present above the overlapping circles, indicating that the modules have been tested in a unit testing environment. The diagram also includes the phrase \"Under Integration Testing,\" suggesting that the modules have been integrated into a larger system or application."
+  },
+  {
+    "page_num": 33,
+    "caption": "A green flowchart illustrates a software development process, from setup to execution, with stages labeled \"Setup Test Environment,\" \"Generate Test Cases,\" \"Generate Testing Data,\" \"Execute Test Cases,\" \"Execute Test Data,\" \"Log Defects,\" \"Regression Testing,\" and \"Defect Reporting.\".  The image shows a flowchart illustrating the process of setting up a test environment, generating test cases, executing test cases, and reporting defects. The flowchart is divided into eight distinct sections, each representing a different step in the process. The sections are labeled as Setup Test Environment, Generate Test Cases, Generate Testing Data, Execute Test Cases, Execute Test Cases Data, Regression Testing, Defect Reporting. The flowchart visually represents the sequence of steps involved in the testing process, highlighting the flow of testing activities and the reporting of defects."
+  },
+  {
+    "page_num": 34,
+    "caption": "A software acceptance test results in a failed acceptance test, causing a software application to be rejected and a product not ready for customer use..  The image shows a software acceptance test process. It depicts a person testing software applications, with a red explosion-shaped cloud labeled \"Acceptance Test\" indicating that the software application has been accepted. There are three boxes: one labeled \"Software Application,\" one labeled \"Software Application Passed,\" and another labeled \"Software Application Failed.\"\n\nThere are also two people present in the image. One person is labeled \"User,\" and the other is labeled \"Passed.\" A green checkmark is placed next to the \"Software Application Passed\" box, indicating that the software application is ready for customer use. A red \"X\" is placed next to the \"Software Application Failed\" box, indicating that the software application has not been accepted."
+  },
+  {
+    "page_num": 35,
+    "caption": "A software development lifecycle process, from Unit Testing to User Acceptance Testing, with QA Team and End-users, is depicted in a flowchart..  The image displays a flowchart illustrating the process of software testing. It shows a sequence of stages, starting with Unit Testing, followed by Integration Testing, System Testing, User Acceptance Testing, and finally UAT Sign-off. The flowchart highlights the collaboration between a Dev Team and a QA Team. The Dev Team initiates the testing process, and the QA Team reviews the results and signs off on the software. The end-users are represented as end-users, and the Production Rollout is shown as a separate process."
+  },
+  {
+    "page_num": 36,
+    "caption": "A person works on a laptop, surrounded by tools, frameworks, and a software development result, with a computer monitor displaying a software development workflow..  The image shows a flowchart illustrating the process of creating a software project. The flowchart is divided into three sections: Tools, Framework, and Software.\n\nIn the Tools section, there is a person working on a laptop, indicating the use of a script. The Framework section shows a laptop with a screen displaying a software project, suggesting the use of software frameworks. The Software section shows a computer monitor with a software project displayed, indicating the result of the software project.\n\nThe flowchart highlights the sequential steps involved in creating a software project, from script to software. The tools and frameworks are used to build the software, while the software itself is the final result."
+  },
+  {
+    "page_num": 40,
+    "caption": "A flowchart illustrates the stages of regression testing, including Retest, Regression, Prioritization, and All, with a recycling symbol and checkmarks for each stage..  The image presents a flowchart illustrating the process of regression testing. It is divided into three sections: Retest All, Regression Test Selection, and Prioritization of Test Cases.\n\nIn the Retest All section, there is a recycling symbol (green triangle) and a checklist with checkmarks (gray squares) next to it. The checklist indicates that the test cases have been retested.\n\nThe Regression Test Selection section shows a flowchart with three interconnected red hexagons. The first hexagon contains a checkmark, indicating that the test cases have been selected. The second hexagon has a checklist with checkmarks, signifying that the selected test cases have been prioritized. The third hexagon has a checklist with checkmarks, signifying that the prioritization of test cases has been completed.\n\nThe Prioritization of Test Cases section shows a flowchart with a checklist and a list of test cases. The checklist has checkmarks, indicating that the prioritization of test cases has been completed."
+  },
+  {
+    "page_num": 42,
+    "caption": "A flowchart illustrates the three types of regression testing: Unit Regression, Regional Regression, and Full Regression..  The image presents a visual representation of three types of regression testing: Unit Regression, Regional Regression, and Full Regression. Each type of regression testing is represented by a separate colored circle, with the circles arranged in a descending order of complexity. The circles are labeled with the type of regression testing, and the text above them clearly states the type of regression testing. The circles are hanging from a line, indicating the hierarchy of complexity."
+  },
+  {
+    "page_num": 43,
+    "caption": "A dark blue window displays a white box with \"Search field(1-35 characters)\" and two buttons: \"SEARCH\" and \"CANCEL\"..  The image shows a dark blue background with a white rectangular box containing the text \"(Search field)1-35 characters\". Below the box, there are two buttons: one labeled \"SEARCH\" in green and the other labeled \"CANCEL\" in red. The text \"Build 1-B002\" is displayed at the bottom of the image."
+  },
+  {
+    "page_num": 43,
+    "caption": "A brown box with a white label displays \"SEARCH (Search field) 1-15 characters\" and two buttons: \"SEARCH\" and \"CANCEL\"..  The image shows a button with two options: \"SEARCH\" and \"CANCEL.\" The button is labeled as \"Build 1-B001.\" The text above the button states \"(Search field)1-15 characters.\" The button has a brown background, and the text is black."
+  },
+  {
+    "page_num": 44,
+    "caption": "A light blue square divided into four quadrants, labeled \"Build 1-B001\", \"Module A\", \"Module B\", and \"Module C\", with arrows indicating build, impact areas, and modification in B002..  The image shows a diagram of a modular architecture, with four square modules labeled A, B, C, and D. Each module is labeled with its name, and there are two black areas within each module, indicating impact areas. The diagram also includes labels for \"Build 1-B001\" and \"Modification in B002.\" The black areas are highlighted, emphasizing their importance or significance within the modular architecture."
+  },
+  {
+    "page_num": 45,
+    "caption": "A pie chart illustrates the impact of a new feature, with 70% of users not affected, 20% experiencing minor issues, and 20% reporting significant problems..  The image presents a pie chart divided into three sections, each representing a different level of impact analysis. The sections are labeled as \"New Feature,\" \"Impact Analysis,\" and \"Not Affected.\" The pie chart shows the proportion of users who experienced each level of impact analysis. The New Feature section has the largest proportion at 20%, followed by Impact Analysis at 70%, and the Not Affected section at 20%. The chart highlights the varying levels of impact across different aspects of the product or service."
+  },
+  {
+    "page_num": 46,
+    "caption": "A blue box labeled \"Test Strategy\" is connected to an orange box labeled \"Test Plan\" via a plus sign, with a question about test logistics..  The image contains a blue box labeled \"Test Strategy,\" a blue box labeled \"Test Logistics,\" and an orange box labeled \"Test Plan.\" The text within the blue boxes states \"Test Strategy is Approach i.e. What, Why, When & How in Testing.\" The blue box with \"Test Strategy\" is a plus sign, indicating addition or combination, while the blue box with \"Test Logistics\" is a equals sign, indicating equalization or sum. The orange box with \"Test Plan\" is a question mark, indicating a question or inquiry."
+  },
+  {
+    "page_num": 48,
+    "caption": "A blue flowchart illustrates the process of designing a product, starting with analyzing the product, followed by planning, resource planning, defining test criteria, scheduling, estimation, and determining test deliverables..  The image displays a flowchart illustrating the process of planning a test environment. It shows eight steps, each represented by a blue box with a white border. The steps include: Analyze the product, Design Test Strategy, Define Test Objectives, Plan Test Environment, Resource Planning, Schedule & Estimation, Determine Test Deliverables. Arrows connect each step to the next, indicating the progression of the process."
+  },
+  {
+    "page_num": 49,
+    "caption": "Four blue boxes on a white background outline a step-by-step process: \"Pick One Or More Product Ideas\", \"Select Metrics\", \"Send Survey\", and \"Analyze Results\"..  The image contains four distinct steps, each represented by a blue box with a white outline. The steps are numbered 01, 02, 03, and 04. Each step has a title and a corresponding icon or diagram. Step 01 shows a chart with a checkmark, step 02 displays a bar graph, step 03 shows a paper airplane, and step 04 shows a magnifying glass."
+  },
+  {
+    "page_num": 49,
+    "caption": "A cyclical process of product development, from interview to review, is illustrated with a man reviewing a document and a woman reviewing a document, with a man performing product walkthrough..  The image shows a flowchart illustrating the process of product development. It depicts three stages: Interview, Review, and Perform. The stages are interconnected, with arrows indicating the progression from interviewing a client to reviewing the product and project documentation. The flowchart highlights the importance of each stage in the product development process."
+  },
+  {
+    "page_num": 50,
+    "caption": "A blue and white flowchart illustrates the testing process, starting with \"Testing Scope\" and progressing through \"Verify Types of Testing,\" \"Problems and Challenges,\" and \"Test Logistics.\".  The image presents a step-by-step process of testing a product or service. The steps are numbered 01, 02, 03, and 04. Each step is represented by a circle, and the text within the circles describes the specific testing phase.\n\nStep 1: Testing Scope\nStep 2: Verify Types of Testing\nStep 3: Problems and Challenges\nStep 4: Test Logistics"
+  },
+  {
+    "page_num": 50,
+    "caption": "A test environment, human resources, and test specs are combined to create a ready-to-test scenario..  The image contains a folder, a group of people, a software package, and a test environment. The text states that the folder represents \"Test specs and Requirement document,\" the group of people represents \"Human resources,\" and the software package represents \"Test environment.\""
+  },
+  {
+    "page_num": 51,
+    "caption": "A blue and white infographic presents four steps: Verify Models (01), Validate Features (02), Maintain Consistency (04), Carry Out Trial-and-Error Experiments (03)..  The image contains four distinct sections, each with a title and a list of three numbered points. The sections are: \"Verify Models,\" \"Validate Features,\" \"Maintain Consistency,\" and \"Carry Out Trial-and-Error Experiments.\" Each section is represented by a blue box with a white border, and the text within the boxes is in a sans-serif font. The layout is organized in a grid-like structure, with each section aligned horizontally."
+  },
+  {
+    "page_num": 52,
+    "caption": "A bank's architecture, including hardware, software, security, usability, compatibility, and performance, is depicted in a hierarchical structure..  Dashboard, Functionality, Usability, Security, Compatibility, UI, Performance, Compatibility, Security, Usability, Compatibility, Security, Usability, Compatibility, Compatibility, Usability, Compatibility, Compatibility, Usability, Compatibility, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility"
+  },
+  {
+    "page_num": 53,
+    "caption": "A software testing process flowchart outlines steps for defining and executing test cases, with a decision point to determine suspension criteria..  The image shows a flowchart with a process to define and execute a suspension criteria. The flowchart has three main steps: Define suspension criteria, Execute Test cases, Suspension criteria met?, Suspend the testing, and Finalize the testing. The flowchart also includes a decision-making step where the suspension criteria is evaluated. The process includes a decision point where the suspension criteria is determined. The flowchart is visually represented with blue boxes, arrows, and text boxes to indicate the steps and decision points."
+  },
+  {
+    "page_num": 54,
+    "caption": "A man in a suit and a woman in a beige sweater discuss exit criteria in a meeting room, with a speech bubble indicating 90% total test cases..  The image shows a man and a woman sitting at a table in a meeting room, engaged in a discussion. The man is speaking to the woman, and there is a speech bubble above them. The speech bubble contains text that reads, \"Do you confirm the Exit Criteria?\" The man is wearing a suit and tie, and the woman is wearing a beige top. They appear to be discussing a test or exam, with the man expressing his opinion that they have not reached 90% of total test cases."
+  },
+  {
+    "page_num": 55,
+    "caption": "A four-panel infographic compares resource planning with and without, highlighting the importance of budgeting, resource allocation, and resource forecasting in project success..  The image contains four distinct sections, each focusing on different aspects of resource planning. The top left section highlights the importance of resource planning, including maximizing project budget spending, enhancing resource reporting and forecasting, detailed budget analysis, and listing resources. The top right section focuses on creating a resource plan, including estimating resources, listing resources, and constructing a resource schedule. The bottom left section emphasizes the lack of resource planning, with key points such as 48% of projects will not be finished on time, 43% of projects will exceed allocated budget, and 31% of projects will not meet their goals. The bottom right section focuses on resource planning techniques, including resource allocation, resource leveling, and resource forecasting."
+  },
+  {
+    "page_num": 56,
+    "caption": "A blue project manager, orange build manager, and blue test manager collaborate on a software project, with the build server, test server, and database server connected through a network of blue boxes..  The image displays a flowchart illustrating the process of building a database server. It shows a sequence of steps, including Project Manager, Build Server, Test Server, Build Manager, Database Server, and Test Manager. Each step is represented by a separate box, and arrows connect them to indicate the flow of the process. The flowchart highlights the steps involved in setting up the database server, including setup, testing, and release."
+  },
+  {
+    "page_num": 57,
+    "caption": "A diagram illustrates a web server for Guru99 Banking Site, connecting four web browsers to a central Internet server, with a globe symbolizing global connectivity..  The image shows a diagram of a web server setup for a banking site called Guru99. The diagram includes a cloud labeled \"Internet,\" which connects to four web browsers. Each browser is represented by a computer monitor icon, and the four web browsers are connected to the cloud via arrows. The web server is shown as a silver server with a globe icon, and the database server is shown as a silver cylinder with a blue and yellow stripe. The diagram also includes the text \"Web browser\" and \"Database server.\""
+  },
+  {
+    "page_num": 59,
+    "caption": "A project timeline for \"Making Test Specification\" shows milestones, deadlines, and test report completion on August 16, 2023..  The image displays a project timeline with milestones, task names, start and end dates, and progress tracking. It includes a Gantt chart with task names, milestones, start and end dates, and progress bars. The chart highlights the completion of the \"Making Test Specification\" milestone on August 4th, 2023, and the \"Test Delivery\" milestone on August 18th, 2023."
+  },
+  {
+    "page_num": 61,
+    "caption": "A flowchart illustrates the process of test case design techniques, including BVA, Equivalence Class Partitioning, Decision Table, State Transition, and Error Guessing..  The image presents a flowchart illustrating the test case design techniques. It includes five distinct sections: Boundary Value Analysis (BVA), Equivalence Class Partitioning, Decision Table, State Transition, and Error Guessing. The BVA section is highlighted in blue, indicating its importance in the testing process. The flowchart visually connects these techniques, showing their sequential relationship and how they contribute to the overall testing process."
+  },
+  {
+    "page_num": 61,
+    "caption": "A plain white background with a subtle texture..  The image is entirely white with no visible visual elements, text, or diagrams."
+  },
+  {
+    "page_num": 62,
+    "caption": "A to five steps outline a process for analyzing and designing test cases, including identifying test scenarios, designing test cases, creating test data, creating test data, and mapping test cases to requirements..  The image displays a step-by-step guide on how to analyze and design test cases. It shows five numbered steps: 1, 2, 3, 4, and 5, which are designed to help identify test scenarios, create test data, and map test cases to requirements. The steps are presented in a linear fashion, with each step clearly labeled and visually distinct from the others. The steps are separated by green lines, making it easy to follow the flow of the process."
+  },
+  {
+    "page_num": 63,
+    "caption": "A black background features three test scenarios: \"Test Document,\" \"Test Scenario,\" and \"Test Case,\" each with a pink and blue speech bubble..  The image displays a flowchart with three test scenarios. Each scenario is represented by a separate speech bubble, with the first scenario on the left, the second scenario in the middle, and the third scenario on the right. The speech bubbles contain the text \"Test Document,\" \"Test Scenario,\" and \"Test Case.\" The flowchart shows the progression of the test cases, highlighting the different stages and their relationships."
+  },
+  {
+    "page_num": 64,
+    "caption": "A table in a webpage header section displays the header, body, footer, and footer information for a test case application..  Header, Body, Footer"
+  },
+  {
+    "page_num": 67,
+    "caption": "A software testing case template displays a login attempt with an invalid password, expected error message, and actual results, with a status of \"PASS\" and a comment indicating the error occurred in the \"home page\" but not in the \"home page is displaying pass\" field..  The image displays a form titled \"Test case template,\" which is used for creating login test cases. The form includes a table with various inputs, expected results, status, and comments. The inputs include login, username, password, and other necessary details. The expected results are displayed as a table with columns for login page status, actual results, and expected status. The status column shows the actual status of the login test case, while the comments column displays the expected status of the login test case. The form is organized in a structured manner, allowing for easy comparison and analysis of login test cases."
+  },
+  {
+    "page_num": 68,
+    "caption": "A table displays login functionality test results for Bank Website Functionality, Login Functionality, and Banking Functionality in Bank, with expected results, actual results, status, and comments..  The image contains a table with columns for Project Name, Module Name, Created By, Executed By, Executed Date, Test Case Description, Pre Steps, Test Step, Preconditions, Test Data, Expected Result, Actual Result, Status, Comments. The table is organized with rows and columns, and each row represents a specific test case. The table includes fields for user login functionality, banking functionality, and login functionality in banking. The table also includes columns for expected result, actual result, status, and comments."
+  },
+  {
+    "page_num": 69,
+    "caption": "A table compares the test case type, description, expected result, and status of functionality, security, usability, and usability in a password-protected system..  The image presents a table with four columns: Test Case Type, Description, Test Step, Expected Result, and Status. The table is divided into two rows, one for Functionality and the other for Security. Each row includes a description of the test case type, a description of the test step, the expected result, and the status. The expected result column shows that all 20 characters in the request should be appropriate."
+  },
+  {
+    "page_num": 70,
+    "caption": "A table displays test case descriptions, test steps, test data, expected result, actual result, and status for TU01 and TU02 cases..  The image shows a table with columns for Test Case ID, Test Case Description, Test Steps, Test Data, Expected Result, Actual Result, and Status. The table contains four test cases: TU01, TU02, and TU03. Each row in the table represents a specific test case, including the test case description, test steps, expected result, actual result, and status."
+  },
+  {
+    "page_num": 77,
+    "caption": "A cartoon depicts a developer and tester, with the developer expressing frustration and the tester questioning the issue..  The image is a cartoon drawing comparing a developer and a tester. It features two stick figures, one labeled as a developer and the other as a tester. The developer is sitting at a computer, while the tester is sitting in front of a computer monitor.\n\nThe text in the image includes the phrases \"How can I make it?\" and \"How can I break it?\" which are commonly used in the context of software development and testing. The two stick figures are depicted in a simple, stick figure style, with facial expressions and body language that convey their roles and perspectives."
+  },
+  {
+    "page_num": 82,
+    "caption": "A process flow diagram illustrates the steps of discovering, reporting, and accepting a bug, with a red arrow indicating the discovery step and a purple arrow indicating acceptance..  The image contains three distinct visual elements: a red rectangle labeled \"Discover defect,\" a green rectangle labeled \"Report defect,\" and a purple rectangle labeled \"Accept defect.\" Each rectangle contains text describing the process of discovering and reporting a defect, as well as accepting or rejecting the defect. The rectangles are arranged in a row, with the red rectangle at the top, the green rectangle in the middle, and the purple rectangle at the bottom."
+  },
+  {
+    "page_num": 87,
+    "caption": "A Test Case Repository (TCR) is represented by a hierarchical structure of folders labeled \"Functional T.C.\", \"Integration T.C.\", \"System T.C.\", and \"Smoke T.C.\" with a Test Lead and a \"Based Line Test case\" connection..  The image shows a Test Case Repository with four folders labeled Functional T.C., Integration T.C., System T.C., and Smoke T.C. Each folder contains four files: Loan, Sales, Loan, and Sales. The Test Lead is connected to each folder, indicating the flow of test cases. The Test Lead is represented by a person icon, suggesting a human interaction with the repository."
+  },
+  {
+    "page_num": 88,
+    "caption": "A black background illustrates a process of reviewing and approving test cases, with a green approval box, white document, and green folder labeled \"Test Case repository.\".  Approved test case, Stores In the Test Case repository, Satisfied the correctness of test case, Go through & Review the contents do the correction only if necessary, Scenario Missing, Wrong Flow, Maximum Test-Coverage"
+  },
+  {
+    "page_num": 89,
+    "caption": "A black background illustrates a process of reviewing and approving test cases, with a green approval box, white document, and green folder labeled \"Test Case repository.\".  Approved test case, Stores In the Test Case repository, Satisfied the correctness of test case, Go through & Review the contents do the correction only if necessary, Scenario Missing, Wrong Flow, Maximum Test-Coverage"
+  },
+  {
+    "page_num": 90,
+    "caption": "A table displays the results of a Cheetah-20 ICICI-AT test case, showing the reviewer's comments, severity, and author's comments..  The image shows a table with columns for Test Case Name, Step No., Reviewer, Severity, and Comments. The table lists three test cases: Cheetah-20-ICICI-AT, Cheetah-20-ICICI-AT, and Sentence not clear. Each row represents a case, with the row number indicating the step number. The reviewer column indicates the severity of the case, with options ranging from \"Critical\" to \"Not Fixed.\" The author comments column shows the opinions of the reviewer, with some cases having positive and negative comments."
+  },
+  {
+    "page_num": 91,
+    "caption": "A financial report for T.C. Module 4 shows total sales of 170, amount transfer of 90, tax pass of 127, and total loans of 110, with a pass rate of 97% and a failure rate of 2%..  The image presents a financial report for a T.C. transaction. The report shows the total number of T.C.s written, executed, and passed, as well as the total number of T.C.s failed. The report includes columns for Total No. of T.C. written, Total No. of T.C. execution, Total No. of T.C. pass, Total No. of T.C. Fail, and Pass% of T.C. execution. The total number of T.C.s is 497, and the total number of T.C.s failed is 5. The report also includes a section titled \"Test execution report\" which lists the sales, amount transfer, tax, and loans for each sheet."
+  },
+  {
+    "page_num": 91,
+    "caption": "A table displays the total number of T.C. written, T.C. execution, and T.C. pass or fail of T.C. Pass % Fail % for Module Name..  The image shows a table with columns for Module Name, Total No. of T.C. written, Total No. of T.C. Execution, Total No. of T.C. Pass, and Fail %. The table has rows for each module, with the total number of T.C. written and executed, as well as the pass and fail percentages."
+  },
+  {
+    "page_num": 98,
+    "caption": "A flowchart illustrates the process of planning, overview meeting, preparation, inspection meeting, and follow-up, with blue arrows indicating the sequence..  The image shows a flowchart illustrating the process of planning, overview meeting, preparation, inspection meeting, and follow-up. It has six distinct boxes, each representing a different stage of the process. Arrows connect the boxes, indicating the sequence of events."
+  },
+  {
+    "page_num": 101,
+    "caption": "A software development lifecycle diagram illustrates the Defect Discovery phase, from Requirements to Maintenance, with a green \"Chaos zone\" indicating a critical path..  The image presents a timeline of software development stages, specifically focusing on the Defect Discovery phase. It shows a horizontal line with various stages labeled: Requirements, Design, Coding, Documentation, Testing, Maintenance. The line is marked with black arrows indicating the progression of the software development process. The Defect Discovery phase is highlighted in green, while the Chaos zone is marked in teal. The timeline highlights the progression of the software development process, from Requirements to Maintenance, with a focus on identifying and addressing defects."
+  },
+  {
+    "page_num": 102,
+    "caption": "A sequential process diagram illustrates the Defect Discovery and Chaos zone stages, from Requirements to Maintenance, with a green \"Chaos zone\" highlighted..  The image presents a timeline of the Defect Discovery process, which includes requirements, design, coding, documentation, testing, and maintenance. The timeline is divided into two sections: Defect Origin and Defect Discovery. The Defect Origin section shows the requirements, design, coding, documentation, testing, and maintenance stages. The Defect Discovery section shows the start of the process, with requirements, design, coding, documentation, testing, and maintenance stages. The timeline is visually represented with a horizontal line, and the process is divided into distinct sections for clarity and organization."
+  },
+  {
+    "page_num": 107,
+    "caption": "A green rectangle labeled \"Output\" points to a black line labeled \"Original Program\" with an arrow, indicating a comparison of results between the original and mutant programs..  The image shows a flowchart with two green boxes labeled \"Original Program\" and \"Mutation Program.\" A black line connects these two boxes, indicating a comparison of the results of both programs. The text \"Compare the results of both program\" is written in green below the line connecting the boxes."
+  },
+  {
+    "page_num": 109,
+    "caption": "Three types of mutation testing (Desicion, Value, Statement) are illustrated in a brown oval, pink rectangle, and blue rectangle..  The image contains three distinct visual elements related to types of mutation testing. The first element is an oval-shaped frame with the text \"Types of Mutation Testing\" written inside. The second element is a banner with the text \"Desicion Mutation\" in a red color. The third element is a banner with the text \"Statement Mutation\" in a blue color. These elements are likely part of a presentation or educational material about different types of mutation testing techniques."
+  },
+  {
+    "page_num": 112,
+    "caption": "A tree diagram illustrates a hierarchical structure with nodes labeled \"Nodes\" and \"Edges,\" connected by blue lines, with a central node and two leaf nodes..  The image shows a diagram of a network with three nodes and two edges. The nodes are represented as red circles, and the edges are represented as blue lines connecting the nodes. The text \"Nodes\" is positioned above the nodes, and \"Edges\" is positioned above the edges. The diagram is simple and clear, illustrating the concept of nodes and edges in a network structure."
+  },
+  {
+    "page_num": 113,
+    "caption": "A sequence diagram illustrates a process with a sequence of red circles, transitioning from sequence to \"While\" and \"Until\" states..  The image contains four diagrams illustrating different concepts related to sequence and flow. These diagrams show a sequence of red circles connected by black lines, a diagram of a sequence of red circles connected by black lines, a diagram of a sequence of red circles connected by black lines, and a diagram of a sequence of red circles connected by black lines, with the text \"Sequence,\" \"While,\" \"If-then-else,\" and \"Until.\""
+  },
+  {
+    "page_num": 114,
+    "caption": "A teal arrow points from a gray circle to a green semicircle, with a white background and a dashed line connecting the two circles..  The image shows a flowchart with a series of gray circles connected by teal arrows. The circles are arranged vertically, and each circle is connected to the next one by a teal arrow. The flowchart appears to be a process or sequence of steps, with each circle representing a step or decision point. The teal arrows indicate the direction of flow or progression from one step to the next. The overall design is simple and clear, with a focus on the progression of the process."
+  },
+  {
+    "page_num": 114,
+    "caption": "A gray circle is connected to three other gray circles by teal arrows, forming a triangular arrangement with a curved teal line connecting the top two circles..  The image shows a flowchart with three gray circles connected by teal arrows. The first circle is at the top, the second circle is in the middle, and the third circle is at the bottom. The teal arrows indicate a sequence or flow of events or processes. The circles are connected by the teal arrows, suggesting a logical progression or flow of information."
+  },
+  {
+    "page_num": 114,
+    "caption": "A diamond-shaped network diagram connects four nodes labeled \"Node 1\", \"Node 2\", \"Node 3\", and \"Node n\", with a dotted line connecting \"Node n\" to \"Node n+1\"..  The image shows a network diagram with nodes labeled \"Node 1,\" \"Node 2,\" \"Node 3,\" and \"Node n.\" The nodes are connected by lines, indicating a relationship or connection between them. The diagram is composed of a diamond shape, with Node 1 at the top and Node n at the bottom. The nodes are arranged in a diamond formation, with Node 2 at the left, Node 3 in the center, and Node n at the right. The diagram also includes a dotted line connecting Node 1 to Node 3, and Node 2 to Node n."
+  },
+  {
+    "page_num": 118,
+    "caption": "A black and white diagram illustrates a decision-making process, starting with a \"Start\" event, followed by a \"yes\" event, and ending with a \"Stop\" event..  The image contains a flowchart with a series of decision-making steps. The flowchart starts with a \"Start\" label at the top, followed by a decision labeled \"a = 10.\" The decision is based on a comparison between two variables, a and b. The flowchart shows two possible outcomes: \"yes\" or \"no.\"\n\nThe flowchart also includes a \"print a\" step, which is represented by a rectangle with the label \"print a, b, c.\" This step is likely to be executed after the decision is made. The flowchart ends with a \"Stop\" label at the bottom."
+  },
+  {
+    "page_num": 119,
+    "caption": "A black and white diagram illustrates a decision-making process, starting with a \"Start\" event, followed by a \"yes\" event, and ending with a \"Stop\" event..  The image shows a flowchart with a series of decision-making steps. The flowchart has a black background and uses white boxes to represent decision points or conditions. The flowchart includes a start point, a decision point labeled \"a = 10,\" and a stop point.\n\nThe decision points are diamond-shaped, with two conditions: \"a > b\" and \"a < c.\" The flowchart shows a series of steps, including:\n\n1. Start\n2. a = 10\n3. a = b\n4. yes\n5. b = c\n6. print a, b, c\n7. stop\n\nThe flowchart illustrates a decision-making process where a variable (a) is determined based on a condition (a > b) and another condition (a < c). The flowchart highlights the decision-making process and the steps involved in determining the variable a."
+  },
+  {
+    "page_num": 120,
+    "caption": "A black and white diagram illustrates a decision-making process, starting with a \"Start\" event, followed by a \"yes\" event, and ending with a \"Stop\" event..  The image contains a flowchart with a series of decision-making steps. The flowchart starts with a \"Start\" label at the top, followed by a decision step labeled \"a = 10.\" This decision step has two possible outcomes: \"a > b\" or \"a < c.\" The flowchart then shows two diamond-shaped decision points, one labeled \"a > b\" and the other labeled \"a < c.\"\n\nThe flowchart also includes a \"Stop\" label at the bottom, indicating a decision point at the end of the process. The flowchart is designed to guide the user through a series of decisions based on a given condition, a variable a."
+  },
+  {
+    "page_num": 121,
+    "caption": "A flowchart with seven oval nodes numbered 1 through 7, connected by black lines, with a red arrow pointing from node 1 to node 7..  The image shows a flowchart with a series of numbered oval shapes, each representing a step in a process. The shapes are connected by lines, indicating a sequential flow of steps. The numbers 1, 2, 3, 4, 5, 6, 7, and 8 are used to represent the steps or stages in the process. The flowchart appears to be a diagram of a process or workflow, possibly related to a software development or project management scenario."
+  },
+  {
+    "page_num": 122,
+    "caption": "A directed graph with seven blue oval nodes numbered 1 through 7, connected by black edges, with a black edge connecting node 1 to node 7..  The image shows a flowchart with a series of numbered oval shapes, each representing a step in a process. The shapes are connected by lines, indicating a sequential flow of steps. The numbers 1, 2, 3, 4, 5, 6, 7, and 8 are used to represent the steps or stages in the process. The flowchart appears to be a diagram of a process or workflow, possibly related to a software development or project management scenario."
+  },
+  {
+    "page_num": 123,
+    "caption": "A black background with a white cross and numbered circles (1-14) in orange, numbered 5-14..  The image shows a number line with the numbers 1 through 14 displayed in a vertical arrangement. The numbers are arranged in a cross shape, with the number 1 at the top and the number 14 at the bottom. The numbers are in a white oval shape, and the background is black."
+  },
+  {
+    "page_num": 123,
+    "caption": "A black line connects two red circles, one at a 90-degree angle and the other at a 45-degree angle, with the word \"While\" above..  The image shows a diagram with two red circles connected by a curved line. The word \"While\" is written above the diagram, indicating that the two circles are connected while they are in a state of transition or while they are not yet in a state of transition."
+  },
+  {
+    "page_num": 124,
+    "caption": "A black background with a white cross pattern features numbered circles in orange, ranging from 1 to 14..  The image contains a number line with the numbers 1 through 14 displayed in a row. The numbers are arranged in a vertical format, with each number positioned above the next. The numbers are in a white oval shape, and the background is black."
+  },
+  {
+    "page_num": 125,
+    "caption": "A programming flowchart illustrates a decision-making process, with a green diamond labeled \"While (next <max =20, int pre =0, int next =1)\" and a gray rectangle labeled \"Print In(next)\" and \"Stop\"..  The image shows a flowchart with a decision-making process. It has three main steps: Start, Print In(next), and Stop. The decision-making process involves an input of two integers, max and pre, and an output of either yes or no. The flowchart uses a diamond shape to indicate the decision-making process. The inputs are max = 20 and pre = 0, and the output is either yes or no. The flowchart is presented in a teal color scheme, with the decision-making process highlighted in a darker teal color."
+  },
+  {
+    "page_num": 126,
+    "caption": "A black background features a vertical list of numbers 1 through 10, numbered in ascending order..  The image shows a row of numbered circles, each representing a different number from 1 to 10. The circles are arranged vertically, with the numbers increasing from top to bottom. The numbers are in a specific order, and the circles are white with orange text. The background is black, providing a stark contrast to the white circles and orange text."
+  },
+  {
+    "page_num": 137,
+    "caption": "A pyramid-shaped diagram illustrates the hierarchy of testing processes, starting with Content Testing, progressing through Interface Testing, Navigation Testing, Component Testing, Performance Testing, and Security Testing..  The image presents a pyramid-shaped diagram illustrating the hierarchy of testing processes. The pyramid is divided into different levels, each representing a specific testing stage. The pyramid is labeled with various stages, including Content Testing, Interface Testing, Navigation Testing, Component Testing, Performance Testing, and Security Testing.\n\nThe pyramid is connected to various boxes representing different testing stages. The boxes are labeled with their respective stages, such as Content Design, Aesthetic Design, Navigation Design, Architecture Design, Component Design, Technology, Performance Testing, and Security Testing.\n\nThe diagram also shows the flow of testing processes, with the user at the top, followed by Interface Testing, Navigation Testing, Component Testing, Performance Testing, and Security Testing. The flow of testing processes is represented by arrows connecting the boxes, indicating the progression and interconnection of the different stages."
+  }
+]

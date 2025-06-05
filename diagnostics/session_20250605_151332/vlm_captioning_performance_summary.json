@@ -1,0 +1,9 @@
+{
+  "total_images_captioned": 88,
+  "total_captioning_time_sec": 10.69155764579773,
+  "average_time_per_image_sec": 0.12149497324770148,
+  "vlm_batch_size_config": 8,
+  "model_compiled_for_vlm": false,
+  "vlm_streaming_config": false,
+  "vlm_caption_length_config": "short"
+}

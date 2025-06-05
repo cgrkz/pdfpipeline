@@ -1,0 +1,25 @@
+# Python Virtual Environment
+venv/
+
+# Python cache and compiled files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Environment variables
+.env
+
+# IDE and Editor specific
+.vscode/
+.idea/
+
+# Gradio cache
+.gradio/
+
+# GGUF Models - These are usually very large!
+gguf_models/
+
+# Build artifacts
+/build/
+/dist/

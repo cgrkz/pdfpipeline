@@ -1,0 +1,32 @@
+[
+  {
+    "chunk_index": 0,
+    "length": 17682,
+    "preview": "[Page 1]\nBCSE301L_SOFTWARE ENGINEERING \n1 \nPresented By,                    \nDr.Baiju B V \nAssistant Professor  \nSchool of Computer Science and \nEngineering VIT, Vellore \nVALIDATION \nAND \nVERIFICATION..."
+  },
+  {
+    "chunk_index": 1,
+    "length": 17849,
+    "preview": "functions such as \n―remove from order‖ or ―submit order‖ would also go under unit \ntesting. \nSuppose a car manufacturer is making a car. He will make different \nparts like its engine, ignition system,..."
+  },
+  {
+    "chunk_index": 2,
+    "length": 17596,
+    "preview": "Test scenarios  \n– Test cases  \n– Test data \n–  Expected test results. \nTest Design Techniques \n\n\n[Page 62]\nSteps in Test Design Phase \n      1. Analyze Requirements  \n– Review the software requiremen..."
+  },
+  {
+    "chunk_index": 3,
+    "length": 17818,
+    "preview": "l \nvariations \nin \nthe \napplication and test \nscenarios \nare \ncovered. \n\n\n[Page 88]\nTest Case Review Process \n \n•\nTest cases should \nbe sent for review \nonly after the test \nengineers \nfinish \nwriting..."
+  },
+  {
+    "chunk_index": 4,
+    "length": 17486,
+    "preview": " and \nmerging. \nSimilar to the While loop, with \ntwo \npaths—looping \nor \ntermination. \n\n\n[Page 114]\nFor \nDo-While \nSwitch Case \n\n\n[Page 115]\n•\nSome of the metrics that can be used to measure the compl..."
+  },
+  {
+    "chunk_index": 5,
+    "length": 8415,
+    "preview": "pecifications. \n•\nThese are the most important factors to consider while assessing the website’s \nfunctionality. \n– Verify that all links and buttons function properly. \n– Validation and submission of..."
+  }
+]

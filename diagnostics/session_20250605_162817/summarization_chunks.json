@@ -1,0 +1,52 @@
+[
+  {
+    "chunk_index": 0,
+    "length": 17987,
+    "preview": "[Page 1]\nBCSE301L_SOFTWARE ENGINEERING \n1 \nPresented By,                    \nDr.Baiju B V \nAssistant Professor  \nSchool of Computer Science and \nEngineering VIT, Vellore \nVALIDATION \nAND \nVERIFICATION..."
+  },
+  {
+    "chunk_index": 1,
+    "length": 17257,
+    "preview": "tural \ntesting. \n \n \n \n \n•\nWhite Box Testing focus on \n– Verification of security holes in source code \n– Testing of any broken or incomplete path \n– To verify the flow of structure as mentioned in th..."
+  },
+  {
+    "chunk_index": 2,
+    "length": 17902,
+    "preview": "p to differentiate between the stages and facilitate understanding of the testing process.) (Image on page 28: A pyramid-shaped diagram illustrates the stages of software development, from acceptance ..."
+  },
+  {
+    "chunk_index": 3,
+    "length": 17530,
+    "preview": " \n       (i) New functionality is added to the application \n– This happens when new features or modules are created in an app or a \nwebsite.  \n– The regression is performed to see if the existing feat..."
+  },
+  {
+    "chunk_index": 4,
+    "length": 17240,
+    "preview": "ment, human resources, and test specs are combined to create a ready-to-test scenario..  The image contains a folder labeled \"Test specs and Requirement document,\" a group of people in blue figures la..."
+  },
+  {
+    "chunk_index": 5,
+    "length": 17901,
+    "preview": "ils, and expected results. The expected result is displayed as \"Acccept\" for login pages that must be displayed. The table also includes sections for status, review, and actual results. The table is o..."
+  },
+  {
+    "chunk_index": 6,
+    "length": 17885,
+    "preview": "t to be executed.  \n–\nWhat are the automation test tools used for today’s test execution?  \n–\nWhat are the modules/functions testing today?  \n–\nRecording the issues while executing the test cases.  \n–..."
+  },
+  {
+    "chunk_index": 7,
+    "length": 17883,
+    "preview": "tion = (Number of Passed Tests + Number of     \n                  Failed Tests + Number of Blocked Tests) / Number of Test Cases \nTotal Percentage of Critical Defects = (Critical Defects / Total Defec..."
+  },
+  {
+    "chunk_index": 8,
+    "length": 17322,
+    "preview": "dition \nTest Input \nExpected Output \nStat\nus \nTC_001 \na > b is true, a > c is not \nchecked \na = 10, b = 5, c = 8 \na = 5, b = 5, c = 8 \nPass/ \nFail \nTC_002 \na > b is false, a > c is true \na = 10, b = 1..."
+  },
+  {
+    "chunk_index": 9,
+    "length": 10870,
+    "preview": "tandards (e.g., Java or AJAX language standards). \n(iii) Structure  \n•\nAssessed to ensure that it properly delivers WebApp content and function, that it is \nextensible, and that it can be supported as..."
+  }
+]

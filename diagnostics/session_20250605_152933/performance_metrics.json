@@ -1,0 +1,17 @@
+{
+  "pdf_processing_times": {
+    "module5 software.pdf": 0.11016225814819336,
+    "hrpolicymanual.pdf": 0.10635972023010254,
+    "DPMHandbook_Feb_2023.pdf": 0.04707932472229004,
+    "eehandbook.pdf": 0.05960369110107422
+  },
+  "vlm_caption_times": [],
+  "index_creation_times": {
+    "module5 software.pdf": 0.6087095737457275,
+    "hrpolicymanual.pdf": 1.148141622543335,
+    "DPMHandbook_Feb_2023.pdf": 0.37660813331604004,
+    "eehandbook.pdf": 0.5391614437103271
+  },
+  "summarization_times": {},
+  "query_times": []
+}

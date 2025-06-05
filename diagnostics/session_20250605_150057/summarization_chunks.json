@@ -1,0 +1,52 @@
+[
+  {
+    "chunk_index": 0,
+    "length": 17929,
+    "preview": "[Page 1]\nBCSE301L_SOFTWARE ENGINEERING \n1 \nPresented By,                    \nDr.Baiju B V \nAssistant Professor  \nSchool of Computer Science and \nEngineering VIT, Vellore \nVALIDATION \nAND \nVERIFICATION..."
+  },
+  {
+    "chunk_index": 1,
+    "length": 17312,
+    "preview": "res that data flows correctly, all conditions are tested, and \nevery part of the code works as expected. \n•\nIt is also called glass box testing or clear box testing or structural \ntesting. \n \n \n \n \n•\n..."
+  },
+  {
+    "chunk_index": 2,
+    "length": 17238,
+    "preview": " level distinctively colored. The color-coded steps help to differentiate between the stages and facilitate understanding of the testing process.) (Image on page 28: A pyramid-shaped diagram illustrat..."
+  },
+  {
+    "chunk_index": 3,
+    "length": 17382,
+    "preview": "e. \n \n\n\n[Page 42]\nTypes of Regression Testing \n•\nThe different types of Regression Testing are as follows: \n\n(Image on page 42: A flowchart illustrates the three types of regression testing: Unit Regr..."
+  },
+  {
+    "chunk_index": 4,
+    "length": 17591,
+    "preview": "Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usability, Compatibility, Usa..."
+  },
+  {
+    "chunk_index": 5,
+    "length": 17964,
+    "preview": "mns for expected result, actual result, status, and comments.)\n\n[Page 69]\n(Image on page 69: A table compares the test case type, description, expected result, and status of functionality, security, u..."
+  },
+  {
+    "chunk_index": 6,
+    "length": 17449,
+    "preview": "\", \"Integration T.C.\", \"System T.C.\", and \"Smoke T.C.\" with a Test Lead and a \"Based Line Test case\" connection..  The image shows a Test Case Repository with four folders labeled Functional T.C., Int..."
+  },
+  {
+    "chunk_index": 7,
+    "length": 17027,
+    "preview": " \n– Identify the purpose of the audit and what it hopes to find. By being \nspecific, helps in getting optimum results and eliminates the \nproblems efficiently \n– Examine the testing processes being do..."
+  },
+  {
+    "chunk_index": 8,
+    "length": 17915,
+    "preview": "F \nEND IF \nPRINT X \nV(G) = E - N + 2 * P \n        = 8 - 7 + 2 * 1      \n        = 3 \nV(G) = P + 1 \n        = 2 + 1  \n        = 3 \nV(G) = R + 1 \n        = 2 + 1       \n        = 3 \n2.Calculate cyclomat..."
+  },
+  {
+    "chunk_index": 9,
+    "length": 9743,
+    "preview": "ram illustrates the hierarchy of testing processes, starting with Content Testing, progressing through Interface Testing, Navigation Testing, Component Testing, Performance Testing, and Security Testi..."
+  }
+]

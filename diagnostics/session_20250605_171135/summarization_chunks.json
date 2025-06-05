@@ -1,0 +1,52 @@
+[
+  {
+    "chunk_index": 0,
+    "length": 17331,
+    "preview": "[Page 1]\nBCSE301L_SOFTWARE ENGINEERING \n1 \nPresented By,                    \nDr.Baiju B V \nAssistant Professor  \nSchool of Computer Science and \nEngineering VIT, Vellore \nVALIDATION \nAND \nVERIFICATION..."
+  },
+  {
+    "chunk_index": 1,
+    "length": 15046,
+    "preview": "ester logo, featuring the letters \"QA\" in black against a white background, is centered and bold..  The image contains the text \"QA testers\" in a sans-serif font.) (Image on page 16: A black cube labe..."
+  },
+  {
+    "chunk_index": 2,
+    "length": 17935,
+    "preview": "m and the engine are working fine or \nnot. \n\n\n[Page 30]\n(Image on page 30: A unit testing setup for a banking application, with a server, module, and transaction buttons, and a table for account trans..."
+  },
+  {
+    "chunk_index": 3,
+    "length": 17586,
+    "preview": "ing symbol (green triangle) and a checkmark (green checkmark) next to a set of four checkboxes. These checkboxes represent different stages of the testing process.\n\nThe Regression Test Selection secti..."
+  },
+  {
+    "chunk_index": 4,
+    "length": 17316,
+    "preview": "pend the testing, and Developer fix the fail cases? The flowchart is divided into three sections: \"Define suspension criteria,\" \"Execute Test cases,\" and \"Suspension criteria met?\". The flowchart high..."
+  },
+  {
+    "chunk_index": 5,
+    "length": 17852,
+    "preview": "racters \nPass  \nChecking if the username validates at least for the \nlength of eight characters. \nFunctionality Test \nCase \nTes\nt Id \nTest \nCondition \nTest Steps \nTest Input \nTest Expected \nResult \nAc..."
+  },
+  {
+    "chunk_index": 6,
+    "length": 17793,
+    "preview": "esubmits the test case for \nreview. \n•\nThis correction process will continue until both authors, and the reviewer \nwill satisfy. \n•\nOnce the review is successful, the reviewer sends it back to the tes..."
+  },
+  {
+    "chunk_index": 7,
+    "length": 17954,
+    "preview": "cts in the code. \n•\nMutation Testing is also called Fault-based testing strategy as it \ninvolves creating a fault in the program and it is a type of White Box \nTesting which is mainly used for Unit Te..."
+  },
+  {
+    "chunk_index": 8,
+    "length": 17775,
+    "preview": "IF \nEND IF \nPRINT X \n\n(Image on page 122: A flowchart with seven oval nodes numbered 1 through 7, connected by arrows, with a final red circle labeled \"1\" and a black line connecting \"1\" to \"2\"..  The..."
+  },
+  {
+    "chunk_index": 9,
+    "length": 8036,
+    "preview": "\nTest the outgoing links from all the pages to the specific domain under test. \n•\nTest all internal links. \n•\nTest links jumping on the same page. \n•\nTest links are used to send emails to admin or oth..."
+  }
+]
