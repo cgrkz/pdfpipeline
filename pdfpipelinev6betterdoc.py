@@ -1890,7 +1890,7 @@ def create_gradio_interface():
     app = MultiPDFRAGApplication(config)
 
     with gr.Blocks(theme=gr.themes.Soft()) as demo:
-        gr.Markdown("# 📚 Enhanced Multi-PDF RAG System")
+        gr.Markdown("# 📚 Multi-PDF RAG System")
         gr.Markdown("**Advanced RAG pipeline with proper FAISS L2 distance handling, optimized document filtering, and enhanced context preservation**")
         uploaded_docs_state = gr.State([])
         thinking_display = gr.State("")
@@ -1963,8 +1963,8 @@ def create_gradio_interface():
                         )
 
                         # Enhanced Debug Section
-                        with gr.Accordion("🔧 Debug Mode (Enhanced L2 Distance)", open=False):
-                            gr.Markdown("**Enhanced:** Now properly handles FAISS L2 distance scores (lower = better)")
+                        with gr.Accordion("🔧 Debug Mode", open=False):
+                            gr.Markdown("**Enhanced:** (lower = better)")
                             debug_query_box = gr.Textbox(
                                 label="Debug Query (or type 'debug: your question' in chat):", 
                                 placeholder="Enter query to debug retrieval...", 
