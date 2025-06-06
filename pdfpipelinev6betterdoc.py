@@ -2,25 +2,26 @@
 
 """
 Enhanced Multi-PDF RAG Pipeline with LlamaIndex and Stella Embed
-==========================================================================
+================================================================
 
-A comprehensive RAG (Retrieval-Augmented Generation) system for processing multiple PDFs
-with advanced features including:
-- Multi-document chat interface with source citations
-- Document comparison and analysis
-- Map-reduce summarization
-- Vision-language model integration for image processing
-- Optimized retrieval with FAISS vector storage
-- Streaming responses for better user experience
+A comprehensive multi-document retrieval-augmented generation system supporting:
+- Multi-PDF processing with text and image extraction
+- Vector search using FAISS with L2 distance indexing
+- LLM integration with multiple model support (Gemma, Qwen, Llama)
+- Visual Language Model (VLM) integration for image captioning
+- Map-reduce document summarization
+- Document comparison and chat interfaces
+- Thinking mode support for compatible models
 
-Features:
-- Supports multiple LLM models with automatic downloading
-- Advanced chunking strategies for better context preservation
-- Proper FAISS L2 distance handling for accurate similarity search
+Key Features:
+- Optimized chunking strategy for better context preservation
+- FAISS IndexFlatL2 with proper score interpretation (lower scores = more similar)
+- Smart document filtering based on relevance scores
+- Streaming support for real-time responses
 - GPU memory management and optimization
-- Comprehensive diagnostics and performance monitoring
+- Comprehensive diagnostics and logging
 
-Installation:
+Installation Requirements:
 sudo apt-get update
 sudo apt-get install -y build-essential cmake curl python3.10-venv python3-pip libvips-dev
 
@@ -82,7 +83,7 @@ from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from llama_index.llms.llama_cpp import LlamaCPP
 from llama_index.vector_stores.faiss import FaissVectorStore
 
-# FAISS vector database for efficient similarity search
+# FAISS vector store support
 try:
     import faiss
     FAISS_AVAILABLE = True
@@ -90,7 +91,7 @@ except ImportError:
     FAISS_AVAILABLE = False
     print("⚠️ FAISS not available. Using SimpleVectorStore instead.")
 
-# Vision-language model support with Moondream 4-bit quantization
+# VLM support - Moondream 4-bit quantized model
 from transformers import (
     AutoTokenizer,
     AutoModelForCausalLM,
@@ -162,7 +163,7 @@ AVAILABLE_LLMS = {
 # ===========================================
 
 class ThinkingModeHandler:
-    """Handles thinking mode for models that support reasoning display"""
+    """Handles thinking mode for models that support it"""
 
     def __init__(self):
         self.thinking_pattern = re.compile(r'<think>.*?</think>', re.DOTALL)
@@ -178,7 +179,7 @@ class ThinkingModeHandler:
         return thinking_content, main_content
 
     def append_no_think(self, prompt: str, model_config: Dict) -> str:
-        """Append /no_think directive to prompt for models that support it"""
+        """Append /no_think directive to prompt if model supports thinking"""
         if model_config.get('supports_thinking', False):
             return prompt + "/no_think"
         return prompt
@@ -188,7 +189,7 @@ class ThinkingModeHandler:
 # ===========================================
 
 class DiagnosticsLogger:
-    """Handles diagnostic logging and performance monitoring for the pipeline"""
+    """Handles diagnostic logging and performance metrics for the pipeline"""
 
     def __init__(self, enabled: bool = True):
         self.enabled = enabled
@@ -227,7 +228,7 @@ class DiagnosticsLogger:
                 f.write(str(content))
 
     def log_performance_metrics(self):
-        """Log all collected performance metrics"""
+        """Log all accumulated performance metrics"""
         if not self.enabled:
             return
 
@@ -247,16 +248,16 @@ class DiagnosticsLogger:
 
 @dataclass
 class EnhancedPipelineConfig:
-    """Configuration settings for the enhanced multi-PDF pipeline"""
+    """Configuration parameters for the enhanced multi-PDF pipeline"""
 
     # Document processing limits
     max_pdfs: int = 10
 
-    # RAG chunking configuration for optimal retrieval
-    rag_chunk_size: int = 2048  # Optimal size for context preservation
-    rag_chunk_overlap: int = 512  # Substantial overlap for better continuity
+    # RAG chunking parameters - optimized for better context preservation
+    rag_chunk_size: int = 2048  # Larger chunks for better context
+    rag_chunk_overlap: int = 512  # Substantial overlap for context continuity
 
-    # Map-reduce summarization settings
+    # Summarization settings - Map-Reduce parameters
     summary_chunk_max_chars: int = 18000
     summary_chunk_overlap_chars: int = 3000
 
@@ -274,7 +275,7 @@ class EnhancedPipelineConfig:
     embedding_model: str = "NovaSearch/stella_en_400M_v5"
     embedding_batch_size: int = 32
 
-    # Vision-language model configuration
+    # VLM (Visual Language Model) settings
     skip_vlm: bool = True
     vlm_model: str = "moondream/moondream-2b-2025-04-14-4bit"
     vlm_caption_length: str = "short"
@@ -283,8 +284,8 @@ class EnhancedPipelineConfig:
     vlm_use_streaming: bool = False
     vlm_text_only_mode: bool = False
 
-    # Query and retrieval settings
-    similarity_top_k: int = 8  # Number of similar chunks to retrieve
+    # Query retrieval settings - optimized for better coverage
+    similarity_top_k: int = 8  # More results for better coverage
     comparison_top_k: int = 3
 
     # System configuration
@@ -298,32 +299,33 @@ class EnhancedPipelineConfig:
 # ===========================================
 
 class PromptBuilder:
-    """Dynamically builds model-specific prompt strings based on chat format"""
+    """Builds model-specific prompt strings based on chat format requirements"""
+    
     def __init__(self, model_config: Optional[Dict] = None):
         self.model_config = model_config or {}
         self.chat_format = self.model_config.get('chat_format')
 
     def set_model(self, model_config: Dict):
-        """Updates the builder with the current model's configuration"""
+        """Update the builder with the current model's configuration"""
         self.model_config = model_config
         self.chat_format = self.model_config.get('chat_format')
         print(f"✅ PromptBuilder updated for chat format: '{self.chat_format or 'gemma (default)'}'")
 
     def get_prompt(self, user_content: str, system_prompt: Optional[str] = None) -> str:
-        """Creates the full prompt string based on the model's chat format"""
-        # Llama 3 format with specific tokens
+        """Create the full prompt string based on the model's chat format"""
+        # Llama 3 format
         if self.chat_format == 'llama-3':
             sys_prompt_str = f"<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\n{system_prompt}<|eot_id|>" if system_prompt else "<|begin_of_text|>"
             full_prompt = f"{sys_prompt_str}<|start_header_id|>user<|end_header_id|>\n\n{user_content}<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
             return full_prompt
 
-        # ChatML format (used by Qwen models)
+        # ChatML (Qwen) format
         elif self.chat_format == 'chatml':
             sys_prompt_str = f"<|im_start|>system\n{system_prompt}<|im_end|>\n" if system_prompt else ""
             full_prompt = f"{sys_prompt_str}<|im_start|>user\n{user_content}<|im_end|>\n<|im_start|>assistant\n"
             return full_prompt
 
-        # Default Gemma format
+        # Default/Gemma format
         else:
             full_user_content = f"{system_prompt}\n\n{user_content}" if system_prompt else user_content
             return f"<start_of_turn>user\n{full_user_content}<end_of_turn>\n<start_of_turn>model\n"
@@ -333,7 +335,7 @@ class PromptBuilder:
 # ===========================================
 
 class StreamingHandler:
-    """Handles streaming output for real-time response display"""
+    """Handles streaming output for various operations"""
 
     def __init__(self):
         self.queue = queue.Queue()
@@ -345,7 +347,7 @@ class StreamingHandler:
             self.queue.put(text)
 
     def get_stream(self) -> Generator[str, None, None]:
-        """Get streaming text generator for real-time display"""
+        """Get streaming text generator"""
         accumulated = ""
         while True:
             try:
@@ -360,7 +362,7 @@ class StreamingHandler:
                 continue
 
     def stop(self):
-        """Stop streaming and signal end"""
+        """Signal end of streaming"""
         self.stop_signal = True
         self.queue.put(None) # Signal end of stream
 
@@ -369,7 +371,7 @@ class StreamingHandler:
 # ===========================================
 
 class OptimizedMoondreamHandler:
-    """Handles Moondream 4-bit quantized vision-language model with GPU optimization"""
+    """Optimized Moondream 4-bit VLM handler with GPU memory management"""
 
     def __init__(self, config: EnhancedPipelineConfig, diagnostics_logger: DiagnosticsLogger):
         self.config = config
@@ -423,13 +425,13 @@ class OptimizedMoondreamHandler:
                 print(f"⚠️ Moondream compilation failed: {e}. Continuing without compilation.")
 
     def _process_batch(self, images: List[Image.Image], batch_size: int) -> Generator[List[Image.Image], None, None]:
-        """Process images in batches for optimal memory efficiency"""
+        """Process images in batches for memory efficiency"""
         for i in range(0, len(images), batch_size):
             batch = images[i:i + batch_size]
             yield batch
 
     def caption_images(self, images: List[Image.Image]) -> List[str]:
-        """Generate captions for images using Moondream with performance optimizations"""
+        """Generate captions for images with memory optimization"""
         if not self.model or self.config.skip_vlm:
             return ["Image (VLM skipped or not loaded)" for _ in images]
 
@@ -468,6 +470,7 @@ class OptimizedMoondreamHandler:
                         else:
                             current_caption_text = self.model.caption(img_pil_rgb, length=caption_length_param)["caption"]
 
+                        # Enhance short captions with additional details
                         if caption_length_param == "short":
                             details_query = "What are the key visual elements, text, or diagrams in this image?"
                             details = self.model.query(img_pil_rgb, details_query)["answer"]
@@ -494,6 +497,7 @@ class OptimizedMoondreamHandler:
         avg_time_per_image = total_processing_time / len(images) if images else 0
         print(f"✅ Captioned {len(images)} images in {total_processing_time:.2f}s (avg: {avg_time_per_image:.2f}s/image)")
 
+        # Log performance metrics
         self.logger.log("vlm_captioning_performance_summary.json", {
             "total_images_captioned": len(images),
             "total_captioning_time_sec": total_processing_time,
@@ -506,7 +510,7 @@ class OptimizedMoondreamHandler:
         return all_captions
 
     def _extract_text_only(self, images: List[Image.Image]) -> List[str]:
-        """Fast text-only extraction from images using Moondream query interface"""
+        """Extract text from images using VLM query capabilities"""
         print("⚡ Running in VLM text-only extraction mode (Moondream query).")
         text_results = []
 
@@ -527,7 +531,7 @@ class OptimizedMoondreamHandler:
         return text_results
 
     def unload(self):
-        """Unload VLM model to free GPU memory"""
+        """Unload VLM to free GPU memory"""
         if self.model:
             print("🗑️ Unloading Moondream VLM...")
 
@@ -549,6 +553,7 @@ class OptimizedMoondreamHandler:
 
 class DocumentManager:
     """Manages multiple PDF documents and their associated data"""
+    
     def __init__(self, config: EnhancedPipelineConfig):
         self.config = config
         self.documents: Dict[str, Dict[str, Any]] = {}
@@ -563,8 +568,10 @@ class DocumentManager:
         """Add a processed document to the manager"""
         if len(self.documents) >= self.config.max_pdfs:
             raise ValueError(f"Maximum number of PDFs ({self.config.max_pdfs}) reached")
+        
         self.documents[pdf_name] = {
-            'path': pdf_path, 'upload_time': datetime.now(),
+            'path': pdf_path, 
+            'upload_time': datetime.now(),
             'page_count': len(raw_text_by_page)
         }
         self.indices[pdf_name] = index
@@ -588,7 +595,7 @@ class DocumentManager:
         return self.indices.get(pdf_name)
 
     def clear_all(self):
-        """Clear all documents from the manager"""
+        """Clear all documents and associated data"""
         self.documents.clear()
         self.indices.clear()
         self.raw_texts.clear()
@@ -599,17 +606,18 @@ class DocumentManager:
 # ===========================================
 
 class EnhancedPDFProcessor:
-    """Processes PDFs with advanced chunking and LlamaIndex integration"""
+    """Process PDFs with LlamaIndex integration and optimized chunking"""
 
     def __init__(self, config: EnhancedPipelineConfig, diagnostics_logger: DiagnosticsLogger):
         self.config = config
         self.logger = diagnostics_logger
 
     def extract_content_from_pdf(self, pdf_path: str) -> Tuple[List[Dict], List[Image.Image], List[int]]:
-        """Extract text and images from PDF with optimization for both quality and performance"""
+        """Extract text and images from PDF with size optimization"""
         print(f"📄 Processing PDF: {pdf_path}")
         start_time = time.time()
         raw_text_by_page, pil_images, image_page_numbers = [], [], []
+        
         try:
             doc = fitz.open(pdf_path)
         except Exception as e:
@@ -622,10 +630,13 @@ class EnhancedPDFProcessor:
         for page_num_idx in tqdm(range(len(doc)), desc="Extracting pages"):
             page = doc[page_num_idx]
             page_num_actual = page_num_idx + 1
+            
+            # Extract text content
             text = page.get_text("text")
             if text.strip():
                 raw_text_by_page.append({'page_num': page_num_actual, 'text': text})
 
+            # Extract images if VLM is enabled
             if not self.config.skip_vlm:
                 for img_info in page.get_images(full=True):
                     xref = img_info[0]
@@ -634,15 +645,20 @@ class EnhancedPDFProcessor:
                         image_bytes = base_image["image"]
                         img_width = base_image.get("width", 0)
                         img_height = base_image.get("height", 0)
+                        
+                        # Skip very small images (likely decorative elements)
                         if img_width < min_image_size or img_height < min_image_size:
                             continue
 
                         pil_image = Image.open(io.BytesIO(image_bytes))
+                        
+                        # Convert RGBA to RGB with white background
                         if pil_image.mode == 'RGBA':
                             bg = Image.new('RGB', pil_image.size, (255, 255, 255))
                             bg.paste(pil_image, mask=pil_image.split()[3])
                             pil_image = bg
 
+                        # Resize large images to save memory
                         if pil_image.width > max_image_size or pil_image.height > max_image_size:
                             ratio = min(max_image_size / pil_image.width, max_image_size / pil_image.height)
                             new_size = (int(pil_image.width * ratio), int(pil_image.height * ratio))
@@ -650,33 +666,44 @@ class EnhancedPDFProcessor:
 
                         pil_images.append(pil_image)
                         image_page_numbers.append(page_num_actual)
+                        
                     except Exception as e_img:
                         print(f"⚠️ Could not extract image xref {xref} on page {page_num_actual}: {e_img}")
 
         doc.close()
+        
+        # Log performance metrics
         pdf_name = os.path.basename(pdf_path)
         extraction_time = time.time() - start_time
         self.logger.add_metric('pdf_processing_times', pdf_name, extraction_time)
+        
         print(f"✅ Extracted {len(raw_text_by_page)} text pages and {len(pil_images)} images in {extraction_time:.2f}s")
+        
         self.logger.log(f"extraction_details_{pdf_name}.json", {
-            "total_pages": len(raw_text_by_page), "total_images": len(pil_images),
+            "total_pages": len(raw_text_by_page), 
+            "total_images": len(pil_images),
             "extraction_time": extraction_time,
             "images_per_page": {str(pn): image_page_numbers.count(pn) for pn in set(image_page_numbers)}
         })
+        
         return raw_text_by_page, pil_images, image_page_numbers
 
     def chunk_for_summarization(self, raw_text_by_page: List[Dict],
                                 image_captions_with_pages: List[Dict]) -> List[str]:
-        """Create large chunks optimized for map-reduce summarization"""
-        print("Chunking for summarization (character-based with smart boundaries)...")
+        """Create large chunks for map-reduce summarization using character-based chunking"""
+        print("Chunking for summarization (character-based with page structure)...")
+        
+        # Create mapping of page numbers to content
         page_texts_map = {item['page_num']: item['text'] for item in raw_text_by_page}
         page_captions_map = {}
+        
         for cap_info in image_captions_with_pages:
             p_num = cap_info['page_num']
             if p_num not in page_captions_map:
                 page_captions_map[p_num] = []
             page_captions_map[p_num].append(f"(Image on page {p_num}: {cap_info['caption']})")
 
+        # Combine all content maintaining page structure
         full_text_for_summary = ""
         all_page_nums = sorted(list(set(page_texts_map.keys()) | set(page_captions_map.keys())))
 
@@ -692,6 +719,7 @@ class EnhancedPDFProcessor:
         if not full_text_for_summary.strip():
             return chunks
 
+        # Character-based chunking with overlap
         start_idx = 0
         text_len = len(full_text_for_summary)
         max_chars = self.config.summary_chunk_max_chars
@@ -701,6 +729,7 @@ class EnhancedPDFProcessor:
             end_idx = min(start_idx + max_chars, text_len)
             current_chunk_text = full_text_for_summary[start_idx:end_idx]
 
+            # Try to break at natural boundaries if not at end of text
             if end_idx < text_len:
                 break_pos_para = current_chunk_text.rfind("\n\n")
                 break_pos_sent = current_chunk_text.rfind("\n")
@@ -719,11 +748,13 @@ class EnhancedPDFProcessor:
             if start_idx >= end_idx:
                 start_idx = end_idx
 
+        # Log chunk information for diagnostics
         self.logger.log("summarization_chunks.json", [
             {"chunk_index": i, "length": len(chunk), "preview": chunk[:200] + "..."}
             for i, chunk in enumerate(chunks)
         ])
-        print(f"Created {len(chunks)} summarization chunks with smart boundaries.")
+        
+        print(f"Created {len(chunks)} summarization chunks with character-based chunking.")
         return chunks
 
     def create_llamaindex_documents(self, pdf_name: str, raw_text_by_page: List[Dict],
@@ -731,7 +762,7 @@ class EnhancedPDFProcessor:
         """Convert extracted content to LlamaIndex documents with enhanced context preservation"""
         documents = []
         
-        # Strategy 1: Create section-based documents for better context
+        # Strategy 1: Create section-based documents for better context continuity
         current_section = ""
         current_pages = []
         section_threshold = 4000  # Characters per section
@@ -744,14 +775,14 @@ class EnhancedPDFProcessor:
             if len(page_text) < 100:
                 continue
             
-            # Add page to current section
+            # Build current section
             if current_section:
                 current_section += f"\n\n--- Page {page_num} ---\n{page_text}"
             else:
                 current_section = f"--- Page {page_num} ---\n{page_text}"
             current_pages.append(page_num)
             
-            # If section is getting large enough, save it
+            # Save section when it reaches threshold
             if len(current_section) >= section_threshold:
                 doc = Document(
                     text=current_section,
@@ -765,12 +796,12 @@ class EnhancedPDFProcessor:
                 )
                 documents.append(doc)
                 
-                # Start new section with overlap for continuity
+                # Start new section with overlap for context continuity
                 overlap_text = current_section[-500:] if len(current_section) > 500 else current_section
                 current_section = f"(continued from previous section)...\n{overlap_text}\n\n--- Page {page_num} ---\n{page_text}"
                 current_pages = [page_num]
         
-        # Don't forget the last section
+        # Add the final section
         if current_section and len(current_section) > 200:
             doc = Document(
                 text=current_section,
@@ -784,7 +815,7 @@ class EnhancedPDFProcessor:
             )
             documents.append(doc)
 
-        # Strategy 2: Individual page documents with enriched context
+        # Strategy 2: Individual page documents with neighboring context
         for page_data in raw_text_by_page:
             page_text = page_data['text'].strip()
             page_num = page_data['page_num']
@@ -793,13 +824,13 @@ class EnhancedPDFProcessor:
                 # Add context from neighboring pages
                 enriched_text = f"Page {page_num} Content:\n{page_text}"
                 
-                # Add previous page context if available
+                # Add previous page context
                 prev_page = next((p for p in raw_text_by_page if p['page_num'] == page_num - 1), None)
                 if prev_page and len(prev_page['text']) > 100:
                     prev_context = prev_page['text'][:200] + "..."
                     enriched_text = f"Previous page context: {prev_context}\n\n{enriched_text}"
                 
-                # Add next page context if available
+                # Add next page context
                 next_page = next((p for p in raw_text_by_page if p['page_num'] == page_num + 1), None)
                 if next_page and len(next_page['text']) > 100:
                     next_context = next_page['text'][:200] + "..."
@@ -821,14 +852,13 @@ class EnhancedPDFProcessor:
             caption_text = img_data['caption']
             page_num = img_data['page_num']
             
-            # Find the corresponding page text and surrounding context
+            # Find corresponding page text and surrounding context
             page_context = ""
             for i, page_data in enumerate(raw_text_by_page):
                 if page_data['page_num'] == page_num:
-                    # Get the full page text
                     page_context = page_data['text']
                     
-                    # Also include some context from previous and next pages
+                    # Include context from previous and next pages
                     if i > 0:
                         prev_text = raw_text_by_page[i-1]['text'][:300]
                         page_context = f"Previous page: {prev_text}...\n\n{page_context}"
@@ -862,7 +892,7 @@ class EnhancedPDFProcessor:
 # ===========================================
 
 class PDFComparisonEngine:
-    """Engine for comparing information across multiple PDF documents"""
+    """Engine for comparing similar PDFs with streaming support"""
 
     def __init__(self, config: EnhancedPipelineConfig, thinking_handler: ThinkingModeHandler, prompt_builder: PromptBuilder):
         self.config = config
@@ -876,7 +906,7 @@ class PDFComparisonEngine:
 
     def compare_documents_streaming(self, query: str, doc_manager: DocumentManager,
                                     selected_docs: List[str], streaming_handler: StreamingHandler) -> str:
-        """Compare documents with streaming output support"""
+        """Compare documents with streaming output"""
         if len(selected_docs) < 2:
             return "Please select at least 2 documents for comparison."
 
@@ -884,6 +914,8 @@ class PDFComparisonEngine:
             return "LLM not loaded. Please select an LLM model first."
 
         streaming_handler.put("🔍 Analyzing documents...\n\n")
+        
+        # Collect information from each document
         doc_results = {}
         for doc_name in selected_docs:
             streaming_handler.put(f"📄 Processing {doc_name}...\n")
@@ -900,6 +932,7 @@ class PDFComparisonEngine:
         streaming_handler.put("\n🤖 Generating comparison...\n\n")
         comparison_prompt = self._create_comparison_prompt(query, doc_results)
 
+        # Handle thinking mode for comparison
         if not self.config.thinking_mode and self.config.current_llm_model in AVAILABLE_LLMS:
             model_config = AVAILABLE_LLMS[self.config.current_llm_model]
             if model_config.get('supports_thinking', False):
@@ -907,6 +940,7 @@ class PDFComparisonEngine:
 
         final_prompt = self.prompt_builder.get_prompt(user_content=comparison_prompt)
 
+        # Generate response with streaming if available
         if self.config.enable_streaming and hasattr(self.llm, 'stream_complete'):
             full_response_text = ""
             for delta in self.llm.stream_complete(final_prompt):
@@ -916,32 +950,29 @@ class PDFComparisonEngine:
             response = self.llm.complete(final_prompt)
             full_response_text = str(response)
 
-        # Always extract thinking content for models that support it, regardless of thinking mode setting
+        # Process thinking content for models that support it
         if self.config.current_llm_model in AVAILABLE_LLMS:
             model_config = AVAILABLE_LLMS[self.config.current_llm_model]
             if model_config.get('supports_thinking', False):
-                # Always extract thinking tags to clean the response
                 extracted_thinking, cleaned_response = self.thinking_handler.extract_thinking(full_response_text)
                 
-                # If we were streaming, we need to clear and re-send the cleaned content
+                # Handle streaming case
                 if self.config.enable_streaming and hasattr(self.llm, 'stream_complete'):
-                    # For streaming, the response might already contain thinking tags mixed in
-                    # We need to process it properly
                     if extracted_thinking and self.config.thinking_mode:
                         streaming_handler.put(f"\n\n💭 Thinking:\n{extracted_thinking}\n\n")
                     if cleaned_response:
                         streaming_handler.put(cleaned_response)
                 else:
-                    # For non-streaming, we can process normally
+                    # Handle non-streaming case
                     if extracted_thinking and self.config.thinking_mode:
                         streaming_handler.put(f"💭 Thinking:\n{extracted_thinking}\n\n")
                     streaming_handler.put(cleaned_response)
             else:
-                # Model doesn't support thinking, use response as-is
+                # Model doesn't support thinking
                 if not (self.config.enable_streaming and hasattr(self.llm, 'stream_complete')):
                     streaming_handler.put(full_response_text)
         else:
-            # Unknown model, use response as-is
+            # Unknown model
             if not (self.config.enable_streaming and hasattr(self.llm, 'stream_complete')):
                 streaming_handler.put(full_response_text)
 
@@ -949,7 +980,7 @@ class PDFComparisonEngine:
         return "Comparison complete."
 
     def _create_comparison_prompt(self, query: str, doc_results: Dict) -> str:
-        """Create a structured prompt for document comparison"""
+        """Create a structured comparison prompt"""
         prompt = f"""You are an AI assistant comparing information from multiple documents.
 
 Your task is to analyze the similarities and differences regarding the query: "{query}"
@@ -991,12 +1022,12 @@ class EnhancedQueryEngine:
         self.llm = None
 
     def set_llm(self, llm):
-        """Set the LLM for query processing"""
+        """Set the LLM for query operations"""
         self.llm = llm
 
     def query_with_sources_optimized(self, query: str, selected_docs: Optional[List[str]] = None,
                                     chat_history_str: str = "") -> Tuple[str, List[Dict], Optional[str]]:
-        """Optimized query processing with proper FAISS L2 score handling and smart document filtering"""
+        """Optimized query processing with proper FAISS L2 score handling"""
         if not selected_docs:
             selected_docs = self.doc_manager.get_all_documents()
 
@@ -1015,7 +1046,7 @@ class EnhancedQueryEngine:
             if model_config.get('supports_thinking', False):
                 query = self.thinking_handler.append_no_think(query, model_config)
 
-        # Collect results per document with proper score understanding
+        # Collect results per document with proper score analysis
         doc_results = {}
         doc_score_stats = {}
         
@@ -1026,13 +1057,13 @@ class EnhancedQueryEngine:
                 clean_query = original_query.strip()
                 retrieved_nodes = retriever.retrieve(clean_query)
 
-                # Store results per document for analysis
+                # Store results and analyze scores per document
                 doc_results[doc_name] = []
                 scores = []
                 
                 for node_with_score in retrieved_nodes:
                     if node_with_score.score is not None:
-                        # With FAISS IndexFlatL2, lower scores = more similar
+                        # With FAISS IndexFlatL2, lower scores indicate higher similarity
                         node_with_score.node.metadata['document_name'] = doc_name
                         doc_results[doc_name].append(node_with_score)
                         scores.append(node_with_score.score)
@@ -1040,18 +1071,17 @@ class EnhancedQueryEngine:
                 # Calculate statistics for this document
                 if scores:
                     doc_score_stats[doc_name] = {
-                        'min_score': min(scores),  # Best match in this doc
+                        'min_score': min(scores),  # Best match in this document
                         'avg_score': sum(scores) / len(scores),
-                        'max_score': max(scores),  # Worst match in this doc
+                        'max_score': max(scores),  # Worst match in this document
                         'count': len(scores)
                     }
                     print(f"📊 {doc_name}: min={min(scores):.3f}, avg={sum(scores)/len(scores):.3f}, max={max(scores):.3f}")
                 else:
                     doc_score_stats[doc_name] = {'min_score': float('inf'), 'avg_score': float('inf'), 'max_score': float('inf'), 'count': 0}
 
-        # Smart document filtering based on L2 distance (lower = better)
+        # Smart document filtering based on L2 distance (lower scores = better matches)
         if len(selected_docs) > 1 and doc_score_stats:
-            # Find documents with the best (lowest) minimum scores
             valid_docs = {name: stats for name, stats in doc_score_stats.items() if stats['count'] > 0}
             
             if valid_docs:
@@ -1060,8 +1090,7 @@ class EnhancedQueryEngine:
                 
                 print(f"🎯 Best scores found: min={best_min_score:.3f}, avg={best_avg_score:.3f}")
                 
-                # Filter out documents that have significantly worse scores
-                # Allow documents whose best match is within reasonable range of the global best
+                # Filter out documents with significantly worse scores
                 score_tolerance = max(0.2, best_min_score * 0.5)  # Adaptive tolerance
                 
                 filtered_results = {}
@@ -1075,7 +1104,7 @@ class EnhancedQueryEngine:
                     else:
                         print(f"🚫 Filtering out {doc_name} (best score: {doc_best_score:.3f}, threshold: {best_min_score + score_tolerance:.3f})")
                 
-                # Only apply filtering if we keep at least one document
+                # Apply filtering only if we keep at least one document
                 if filtered_results:
                     doc_results = filtered_results
                 else:
@@ -1085,7 +1114,7 @@ class EnhancedQueryEngine:
         for doc_name, nodes in doc_results.items():
             all_source_nodes_with_scores.extend(nodes)
 
-        # Fallback if no results
+        # Fallback if no results found
         if not all_source_nodes_with_scores:
             print("⚠️ No results found, trying with relaxed parameters...")
             for doc_name in selected_docs:
@@ -1100,10 +1129,10 @@ class EnhancedQueryEngine:
         if not all_source_nodes_with_scores:
             return "I couldn't find any information in the selected documents to answer your question.", [], None
 
-        # Sort nodes by L2 distance (ascending = best first)
-        all_source_nodes_with_scores.sort(key=lambda x: x.score or float('inf'))  # Lower scores first
+        # Sort nodes by L2 distance (ascending = best matches first)
+        all_source_nodes_with_scores.sort(key=lambda x: x.score or float('inf'))
 
-        # Use top N nodes overall for context
+        # Use top N nodes for context
         top_k_overall = min(self.config.similarity_top_k, len(all_source_nodes_with_scores))
         context_nodes = [item.node for item in all_source_nodes_with_scores[:top_k_overall]]
 
@@ -1117,7 +1146,7 @@ class EnhancedQueryEngine:
             page_num = node.metadata.get('page_number', 'Unknown Page')
             node_content = node.get_content(metadata_mode=MetadataMode.NONE)
             
-            # Ensure we have good context length
+            # Ensure adequate context length
             content_preview = node_content[:1500] if len(node_content) > 1500 else node_content
             context_str_parts.append(f"Context {i+1} from {doc_name} (Page {page_num}):\n{content_preview}")
             
@@ -1140,10 +1169,10 @@ class EnhancedQueryEngine:
         system_prompt = """You are a knowledgeable assistant. Use the provided context to answer the user's question comprehensively and accurately.
 
     Instructions:
-    - Use the information from the context to provide a detailed, helpful answer
+    - Use the information from only the context to provide a detailed, helpful answer
     - If the context contains relevant information, use it to respond thoroughly
-    - Be specific and reference details from the context when appropriate
-    - If you can partially answer from the context, do so and indicate what aspects you can address"""
+    - If the context does not contain the information, mention that "Provided context does not contain information relevant to the query"
+    - Be specific and reference details from the context when appropriate"""
 
         user_content = f"""Context from documents:
 
@@ -1163,12 +1192,11 @@ class EnhancedQueryEngine:
         response = self.llm.complete(final_prompt_for_llm)
         response_text = str(response)
 
-        # Always extract thinking content for models that support it, regardless of thinking mode setting
+        # Extract thinking content for models that support it
         thinking_content = None
         if self.config.current_llm_model in AVAILABLE_LLMS:
             model_config = AVAILABLE_LLMS[self.config.current_llm_model]
             if model_config.get('supports_thinking', False):
-                # Always extract thinking tags to clean the response
                 extracted_thinking, cleaned_response = self.thinking_handler.extract_thinking(response_text)
                 response_text = cleaned_response  # Use cleaned response regardless of thinking mode
                 
@@ -1176,7 +1204,7 @@ class EnhancedQueryEngine:
                 if self.config.thinking_mode:
                     thinking_content = extracted_thinking
 
-        # Better fallback handling for unhelpful responses
+        # Fallback handling for unhelpful responses
         if self._is_unhelpful_response(response_text) and len(context_str) > 200:
             print("⚠️ LLM gave unhelpful response despite good context. Trying alternative approach...")
             
@@ -1200,7 +1228,7 @@ class EnhancedQueryEngine:
                 alternative_response = self.llm.complete(final_direct_prompt)
                 alternative_text = str(alternative_response)
                 
-                # Also clean alternative response for thinking models
+                # Clean alternative response for thinking models
                 if self.config.current_llm_model in AVAILABLE_LLMS:
                     model_config = AVAILABLE_LLMS[self.config.current_llm_model]
                     if model_config.get('supports_thinking', False):
@@ -1223,9 +1251,9 @@ class EnhancedQueryEngine:
 
     def chat_streaming(self, message: str, selected_docs: List[str],
                     streaming_handler: StreamingHandler, chat_history_list: List[Tuple[str, str]]):
-        """Handle streaming chat with document context"""
+        """Handle streaming chat with documents"""
 
-        # Convert chat history to string for the LLM context
+        # Convert chat history to string for LLM context
         chat_history_str = "\n".join([f"User: {q}\nAssistant: {a}" for q, a in chat_history_list[-3:]])  # Limit history
 
         response_text, sources, thinking_content = self.query_with_sources_optimized(message, selected_docs, chat_history_str)
@@ -1238,20 +1266,21 @@ class EnhancedQueryEngine:
                 time.sleep(0.001)
             streaming_handler.put("\n\n📝 Response:\n")
 
-        # Check if response_text is not empty before streaming
+        # Stream the main response
         if response_text and response_text.strip():
-            for char_or_word in response_text.split(' '): # Simple space split for streaming
+            for char_or_word in response_text.split(' '): # Simple word-based streaming
                 streaming_handler.put(char_or_word + ' ')
                 time.sleep(0.02) # Simulate streaming delay
         else:
             streaming_handler.put("I couldn't generate a response. Please try rephrasing your question.")
 
+        # Add source information
         if sources:
             streaming_handler.put("\n\n📚 **Sources:**\n")
             unique_sources_dict = {}
             for source in sorted(sources, key=lambda x: x['score']):  # Sort by score ascending (best first)
                 key = f"{source['document']}_p{source['page']}"
-                # Store the best score for a unique source page
+                # Store the best score for each unique source page
                 if key not in unique_sources_dict or source['score'] < unique_sources_dict[key]['score']:  # Lower is better
                     unique_sources_dict[key] = source
 
@@ -1266,7 +1295,7 @@ class EnhancedQueryEngine:
 # ===========================================
 
 class MultiPDFRAGApplication:
-    """Main application class managing the entire RAG pipeline"""
+    """Main application class managing the entire multi-PDF RAG pipeline"""
 
     def __init__(self, config: EnhancedPipelineConfig):
         self.config = config
@@ -1288,10 +1317,10 @@ class MultiPDFRAGApplication:
         self.models_dir.mkdir(exist_ok=True)
 
     def _initialize_llamaindex(self):
-        """Initialize LlamaIndex with optimized settings for the pipeline"""
+        """Initialize LlamaIndex with optimized settings"""
         print("🚀 Initializing LlamaIndex components...")
 
-        # Use HuggingFaceEmbedding for the Stella model
+        # Set up HuggingFace embedding model
         Settings.embed_model = HuggingFaceEmbedding(
             model_name=self.config.embedding_model,
             device=self.config.device,
@@ -1299,7 +1328,7 @@ class MultiPDFRAGApplication:
             trust_remote_code=True  # Required for this model
         )
 
-        Settings.llm = None # prevents loading the default openai api model
+        Settings.llm = None # Prevents loading the default OpenAI API model
 
         # Optimized chunking strategy for better retrieval
         Settings.node_parser = SentenceSplitter(
@@ -1318,12 +1347,12 @@ class MultiPDFRAGApplication:
         print(f"✅ LlamaIndex initialized with {self.config.embedding_model} and optimized chunking")
 
     def debug_chat_response(self, query: str, selected_docs: List[str]) -> str:
-        """Debug helper with enhanced score understanding for troubleshooting"""
+        """Debug helper with proper score understanding for FAISS L2 distance"""
         
         print(f"\n🔍 DEBUG: Processing query: '{query}'")
         print(f"📁 Selected documents: {selected_docs}")
         
-        # Check if documents exist
+        # Check document availability
         available_docs = self.doc_manager.get_all_documents()
         print(f"📚 Available documents: {available_docs}")
         
@@ -1353,7 +1382,7 @@ class MultiPDFRAGApplication:
         return "Debug complete - check console output. Note: Lower scores = better matches with FAISS L2 distance."
 
     def load_llm(self, model_key: str, thinking_mode: bool = False, progress=gr.Progress()) -> str:
-        """Load a specific LLM model with progress tracking"""
+        """Load a specific LLM model with proper configuration"""
         if model_key not in AVAILABLE_LLMS:
             return f"Unknown model: {model_key}"
 
@@ -1372,7 +1401,7 @@ class MultiPDFRAGApplication:
             model_config = AVAILABLE_LLMS[model_key]
             progress(0.1, desc=f"Loading {model_config['name']}...")
 
-            # Update config
+            # Update configuration
             self.config.current_llm_model = model_key
             self.config.thinking_mode = thinking_mode
 
@@ -1423,7 +1452,7 @@ class MultiPDFRAGApplication:
             return f"❌ Error loading model: {str(e)}"
 
     def _download_gguf_model(self, repo_id: str, filename: str, progress=gr.Progress()) -> str:
-        """Download GGUF model from HuggingFace if not already cached"""
+        """Download GGUF model if not already present"""
         model_path = self.models_dir / filename
 
         if not model_path.exists():
@@ -1472,6 +1501,7 @@ class MultiPDFRAGApplication:
 
             progress((i + 1) / total_files, desc=f"Processing {pdf_name}...")
 
+            # Reinitialize VLM periodically for memory management
             if (i > 0 and i % vlm_reinit_interval == 0 and not self.config.skip_vlm and self.vlm_handler):
                 print("♻️ Reinitializing VLM for memory optimization during batch processing...")
                 self.vlm_handler.unload()
@@ -1491,6 +1521,7 @@ class MultiPDFRAGApplication:
                 results.append(f"❌ Error processing {pdf_name}: {str(e)}")
                 if torch.cuda.is_available(): torch.cuda.empty_cache()
 
+        # Clean up VLM after batch processing
         if self.vlm_handler and not self.config.skip_vlm:
             print("🧹 Unloading VLM after batch processing to free memory...")
             self.vlm_handler.unload()
@@ -1503,7 +1534,7 @@ class MultiPDFRAGApplication:
         return summary_msg, self.doc_manager.get_all_documents()
 
     def process_pdf(self, pdf_file_obj, progress=gr.Progress(), progress_subtask=False) -> Tuple[str, List[str]]:
-        """Process a single PDF file through the complete pipeline"""
+        """Process a single PDF file"""
         if not pdf_file_obj:
             return "No file uploaded", []
 
@@ -1521,12 +1552,14 @@ class MultiPDFRAGApplication:
 
         if not progress_subtask: progress(0.1, desc=f"Processing {pdf_name}...")
 
+        # Extract content from PDF
         raw_text_by_page, images, image_page_nums = self.pdf_processor.extract_content_from_pdf(pdf_path)
         if not raw_text_by_page and not images:
             return f"No content from '{pdf_name}'", self.doc_manager.get_all_documents()
 
         if not progress_subtask: progress(0.3, desc="Image captions..." if images else "Processing text...")
 
+        # Process images with VLM if available
         image_captions_with_pages_for_rag_and_summary = []
         if images and not self.config.skip_vlm:
             try:
@@ -1559,10 +1592,12 @@ class MultiPDFRAGApplication:
 
         if not progress_subtask: progress(0.6, desc="Creating document index...")
 
+        # Create LlamaIndex documents
         documents_for_index = self.pdf_processor.create_llamaindex_documents(
             pdf_name, raw_text_by_page, image_captions_with_pages_for_rag_and_summary
         )
 
+        # Create vector index
         start_time_idx = time.time()
         if FAISS_AVAILABLE:
             # Get embedding dimension dynamically
@@ -1580,6 +1615,7 @@ class MultiPDFRAGApplication:
         self.diagnostics_logger.add_metric('index_creation_times', pdf_name, time.time() - start_time_idx)
         if not progress_subtask: progress(0.9, desc="Finalizing...")
 
+        # Add document to manager
         self.doc_manager.add_document(
             pdf_name, pdf_path, raw_text_by_page,
             image_captions_with_pages_for_rag_and_summary,
@@ -1592,7 +1628,7 @@ class MultiPDFRAGApplication:
 
     def summarize_document_mapreduce(self, selected_pdf: str, progress=gr.Progress(),
                                      streaming_handler: Optional[StreamingHandler] = None) -> str:
-        """Generate comprehensive document summary using map-reduce strategy"""
+        """Summarize a document using map-reduce approach"""
         if not selected_pdf or selected_pdf not in self.doc_manager.documents:
             return "Please select a valid PDF to summarize"
 
@@ -1600,6 +1636,7 @@ class MultiPDFRAGApplication:
             return "⚠️ Please select and load an LLM model before summarizing"
 
         try:
+            # Unload VLM to free memory for summarization
             if self.vlm_handler and self.vlm_handler.model:
                 print("🧹 Unloading VLM before summarization to free memory...")
                 self.vlm_handler.unload()
@@ -1618,6 +1655,7 @@ class MultiPDFRAGApplication:
 
             if not raw_texts: return "No text content available for summarization"
 
+            # Create chunks for map-reduce summarization
             chunks = self.pdf_processor.chunk_for_summarization(raw_texts, image_data_for_summary)
             if not chunks: return "Could not prepare chunks for summarization"
 
@@ -1629,15 +1667,17 @@ class MultiPDFRAGApplication:
             current_model_config = AVAILABLE_LLMS.get(self.config.current_llm_model, {})
             context_window = current_model_config.get('context_window', 8192)
 
+            # Store original max tokens and set for map phase
             original_max_tokens = Settings.llm.max_new_tokens
             Settings.llm.max_new_tokens = self.config.map_summary_max_tokens
 
-            # MAP PHASE: Summarize each chunk individually
+            # MAP PHASE: Summarize each chunk
             for i, chunk_text_full in enumerate(chunks):
                 map_progress = 0.2 + (0.6 * (i + 1) / len(chunks))
                 progress(map_progress, desc=f"Summarizing chunk {i+1}/{len(chunks)}...")
                 if streaming_handler: streaming_handler.put(f"📝 Summarizing chunk {i+1}/{len(chunks)}...\n")
 
+                # Calculate available space for chunk content
                 PROMPT_BUFFER_CHARS = 2048
                 available_space_for_chunk = context_window - PROMPT_BUFFER_CHARS - Settings.llm.max_new_tokens
                 chunk_text_to_summarize = chunk_text_full[:max(0, available_space_for_chunk)]
@@ -1666,6 +1706,7 @@ End of TEXT SEGMENT. Begin the summary directly."""
 
                 map_prompt = self.prompt_builder.get_prompt(map_user_content, map_system_prompt)
 
+                # Handle thinking mode for map phase
                 if not self.config.thinking_mode and current_model_config.get('supports_thinking', False):
                     map_prompt = self.thinking_handler.append_no_think(map_prompt, current_model_config)
 
@@ -1673,6 +1714,7 @@ End of TEXT SEGMENT. Begin the summary directly."""
                     summary_obj = Settings.llm.complete(map_prompt)
                     summary_text = str(summary_obj).strip()
 
+                    # Extract thinking content if in thinking mode
                     if self.config.thinking_mode and current_model_config.get('supports_thinking', False):
                         _, summary_text = self.thinking_handler.extract_thinking(summary_text)
 
@@ -1682,6 +1724,7 @@ End of TEXT SEGMENT. Begin the summary directly."""
                     print(f"❌ Error summarizing chunk {i} for {selected_pdf}: {e_map}")
                     chunk_summaries_content.append(f"Error summarizing chunk {i+1}.")
 
+            # Restore original max tokens
             Settings.llm.max_new_tokens = original_max_tokens
 
             self.diagnostics_logger.log(f"map_chunk_summaries_text_{selected_pdf}.json", chunk_summaries_content)
@@ -1695,8 +1738,9 @@ End of TEXT SEGMENT. Begin the summary directly."""
 
             final_summary_text = ""
 
-            # REDUCE PHASE: Combine all chunk summaries into final summary
+            # REDUCE PHASE: Combine summaries
             if len(combined_chunk_summaries_text) > 35000:
+                # For very long documents, create sectioned summary
                 print(f"Combined summaries for {selected_pdf} is long. Generating sectioned summary.")
                 final_summary_text = f"# Summary of {selected_pdf}\n\n"
                 final_summary_text += "The document is extensive. Here are the key points from each section:\n\n"
@@ -1709,6 +1753,7 @@ End of TEXT SEGMENT. Begin the summary directly."""
                         streaming_handler.put(section)
                         time.sleep(0.01)
             else:
+                # For manageable documents, create synthesized summary
                 print(f"Combined summaries for {selected_pdf} is manageable. Generating synthesized summary.")
 
                 Settings.llm.max_new_tokens = self.config.reduce_summary_max_tokens
@@ -1739,6 +1784,7 @@ Your primary objective is to integrate the information from the provided segment
 
 Begin the final consolidated summary directly with the Main Title."""
 
+                # Calculate available space for combined summaries
                 PROMPT_BUFFER_CHARS = 3072
                 available_space_for_combined = context_window - PROMPT_BUFFER_CHARS - Settings.llm.max_new_tokens
                 combined_summaries_for_reduce = combined_chunk_summaries_text[:max(0, available_space_for_combined)]
@@ -1753,10 +1799,12 @@ Begin the final consolidated summary directly with the Main Title."""
 
                 reduce_prompt = self.prompt_builder.get_prompt(reduce_user_content, reduce_system_prompt)
 
+                # Handle thinking mode for reduce phase
                 if not self.config.thinking_mode and current_model_config.get('supports_thinking', False):
                     reduce_prompt = self.thinking_handler.append_no_think(reduce_prompt, current_model_config)
 
                 try:
+                    # Generate final summary with streaming if available
                     if streaming_handler and hasattr(Settings.llm, 'stream_complete'):
                         temp_final_summary = ""
                         for delta in Settings.llm.stream_complete(reduce_prompt):
@@ -1764,6 +1812,7 @@ Begin the final consolidated summary directly with the Main Title."""
                             temp_final_summary += delta.delta
                         final_summary_text = temp_final_summary
 
+                        # Handle thinking content for streaming
                         if self.config.thinking_mode and current_model_config.get('supports_thinking', False):
                             thinking_content, main_content = self.thinking_handler.extract_thinking(final_summary_text)
                             if thinking_content:
@@ -1772,6 +1821,7 @@ Begin the final consolidated summary directly with the Main Title."""
                                 streaming_handler.put(main_content)
                                 final_summary_text = main_content
                     else:
+                        # Non-streaming generation
                         summary_obj = Settings.llm.complete(reduce_prompt)
                         response_text = str(summary_obj).strip()
 
@@ -1786,8 +1836,10 @@ Begin the final consolidated summary directly with the Main Title."""
                     final_summary_text = f"Error generating final summary: {str(e_reduce)}\n\n---\nCombined Chunk Summaries:\n{combined_chunk_summaries_text}"
                     if streaming_handler: streaming_handler.put(final_summary_text)
 
+            # Restore original max tokens
             Settings.llm.max_new_tokens = original_max_tokens
 
+            # Log results and cleanup
             self.diagnostics_logger.log(f"final_summary_{selected_pdf}.md", final_summary_text)
             self.diagnostics_logger.add_metric('summarization_times', selected_pdf, time.time() - start_time)
             progress(1.0, desc="Summary complete!")
@@ -1811,7 +1863,7 @@ Begin the final consolidated summary directly with the Main Title."""
 
     def chat_with_documents(self, message: str, chat_history: List[Tuple[str, str]],
                             selected_docs: List[str]) -> Tuple[str, List[Tuple[str, str]], Optional[str]]:
-        """Handle chat interactions with document context"""
+        """Chat interface for querying documents"""
         if not message.strip():
             return "", chat_history, None
         if not self.doc_manager.get_all_documents():
@@ -1826,12 +1878,15 @@ Begin the final consolidated summary directly with the Main Title."""
         docs_to_query = selected_docs if selected_docs else self.doc_manager.get_all_documents()
         query_start = time.time()
 
+        # Prepare chat history context
         chat_history_str = "\n".join([f"User: {q}\nAssistant: {a}" for q, a in chat_history])
 
         response, sources, thinking_content = self.query_engine.query_with_sources_optimized(message, docs_to_query, chat_history_str)
 
         self.diagnostics_logger.add_metric('query_times', f"query_{len(self.diagnostics_logger.performance_metrics['query_times'])}",
                                              time.time() - query_start)
+        
+        # Add source information to response
         if sources:
             source_text = "\n\n📚 **Sources:**\n"
             unique_sources = {}
@@ -1848,13 +1903,14 @@ Begin the final consolidated summary directly with the Main Title."""
         return "", chat_history, thinking_content
 
     def compare_documents(self, query: str, selected_docs: List[str], progress=gr.Progress()) -> str:
-        """Compare information across multiple documents"""
+        """Compare multiple documents on a specific query"""
         if not query.strip(): return "Please enter a question for comparison"
         if len(selected_docs) < 2: return "Please select at least 2 documents for comparison"
 
         if not Settings.llm:
             return "⚠️ Please select and load an LLM model first"
 
+        # Free memory before comparison
         if self.vlm_handler and self.vlm_handler.model:
             print("🧹 Unloading VLM before comparison...")
             self.vlm_handler.unload()
@@ -1863,6 +1919,7 @@ Begin the final consolidated summary directly with the Main Title."""
 
         progress(0.3, desc="Analyzing documents...")
 
+        # Use temporary streaming handler for comparison
         temp_stream_handler = StreamingHandler()
 
         thread = threading.Thread(
@@ -1885,13 +1942,13 @@ Begin the final consolidated summary directly with the Main Title."""
 # ===========================================
 
 def create_gradio_interface():
-    """Create the comprehensive Gradio interface for the RAG system"""
+    """Create the Gradio interface with enhanced features"""
     config = EnhancedPipelineConfig()
     app = MultiPDFRAGApplication(config)
 
     with gr.Blocks(theme=gr.themes.Soft()) as demo:
-        gr.Markdown("# 📚 Multi-PDF RAG System")
-        gr.Markdown("**Advanced RAG pipeline with proper FAISS L2 distance handling, optimized document filtering, and enhanced context preservation**")
+        gr.Markdown("# 📚 Enhanced Multi-PDF RAG System")
+        gr.Markdown("**Features:** Optimized FAISS L2 distance handling, improved document filtering, and enhanced context preservation")
         uploaded_docs_state = gr.State([])
         thinking_display = gr.State("")
 
@@ -1903,7 +1960,7 @@ def create_gradio_interface():
                 with gr.Row():
                     llm_dropdown = gr.Dropdown(
                         label="Select LLM Model",
-                        choices=[(config['name'], key) for key, config in AVAILABLE_LLMS.items()],
+                        choices=[(config_item['name'], key) for key, config_item in AVAILABLE_LLMS.items()],
                         value=None,
                         interactive=True
                     )
@@ -1951,7 +2008,7 @@ def create_gradio_interface():
                         ("Text only (fast)", "text_only"),
                         ("Full captioning (comprehensive)", "full")
                     ],
-                    value="skip" if not config.skip_vlm else "skip"
+                    value="skip" if config.skip_vlm else "skip"
                 )
 
             with gr.Column(scale=2): # Right Panel (Tabs)
@@ -1963,8 +2020,8 @@ def create_gradio_interface():
                         )
 
                         # Enhanced Debug Section
-                        with gr.Accordion("🔧 Debug Mode", open=False):
-                            gr.Markdown("**Enhanced:** (lower = better)")
+                        with gr.Accordion("🔧 Debug Mode (FAISS L2 Distance)", open=False):
+                            gr.Markdown("**Debug Info:** Properly handles FAISS L2 distance scores (lower scores = better matches)")
                             debug_query_box = gr.Textbox(
                                 label="Debug Query (or type 'debug: your question' in chat):", 
                                 placeholder="Enter query to debug retrieval...", 
@@ -2017,7 +2074,7 @@ def create_gradio_interface():
         # Event Handlers & Logic
 
         def get_gpu_status_str():
-            """Get current GPU memory status as formatted string"""
+            """Get current GPU memory status"""
             if torch.cuda.is_available():
                 allocated = torch.cuda.memory_allocated() / 1024**3
                 reserved = torch.cuda.memory_reserved() / 1024**3
@@ -2026,7 +2083,7 @@ def create_gradio_interface():
             return "GPU not available"
 
         def update_all_doc_selectors(processed_doc_names: List[str]):
-            """Update all document selector components with current document list"""
+            """Update all document selector components"""
             chat_selection = processed_doc_names if processed_doc_names else []
             summary_selection = processed_doc_names[0] if processed_doc_names else None
 
@@ -2049,7 +2106,7 @@ def create_gradio_interface():
             return gr.Checkbox(visible=False, value=False)
 
         def handle_load_llm(llm_key, thinking_mode):
-            """Handle loading of selected LLM model"""
+            """Handle loading of selected LLM"""
             if not llm_key:
                 return "Please select an LLM model first", gr.Textbox(visible=False)
 
@@ -2062,7 +2119,7 @@ def create_gradio_interface():
             return status, gr.Textbox(visible=show_thinking)
 
         def handle_pdf_upload_btn_click(list_of_pdf_filepaths, current_doc_state, progress=gr.Progress()):
-            """Handle PDF upload and processing with progress tracking"""
+            """Handle PDF upload and processing"""
             if not list_of_pdf_filepaths:
                 return "No files provided for processing.", current_doc_state, *update_all_doc_selectors(current_doc_state), \
                        (get_gpu_status_str() if torch.cuda.is_available() else None)
@@ -2142,7 +2199,7 @@ def create_gradio_interface():
 
         # Debug handler
         def handle_debug_click(debug_query, selected_docs):
-            """Handle debug query for retrieval troubleshooting"""
+            """Handle debug button click"""
             if not debug_query.strip():
                 return "Please enter a query to debug", gr.Textbox(visible=False)
             
@@ -2158,12 +2215,12 @@ def create_gradio_interface():
         # Chat handler with debug support
         def handle_chat_submit(message: str, history: List[Tuple[str,str]],
                                selected_chat_docs: List[str], stream_chat: bool):
-            """Handle chat submission with streaming support and debug functionality"""
+            """Handle chat message submission"""
             if not message.strip():
                 yield message, history, ""
                 return
 
-            # Debug check
+            # Debug command support
             if message.lower().startswith("debug:"):
                 debug_query = message[6:].strip()  # Remove "debug:" prefix
                 debug_result = app.debug_chat_response(debug_query, selected_chat_docs)
@@ -2203,7 +2260,7 @@ def create_gradio_interface():
 
         # Summarization handler
         def handle_summarize_btn_click(doc_to_summarize_name: str, stream_summary: bool, progress=gr.Progress()):
-            """Handle document summarization with streaming support"""
+            """Handle document summarization"""
             if not doc_to_summarize_name:
                 yield "Please select a document to summarize."
                 return
@@ -2228,7 +2285,7 @@ def create_gradio_interface():
 
         # Comparison handler
         def handle_compare_btn_click(query: str, docs_for_comparison: List[str], stream_compare: bool, progress=gr.Progress()):
-            """Handle document comparison with streaming support"""
+            """Handle document comparison"""
             if not query.strip():
                 yield "Please enter a question for comparison."
                 return
@@ -2258,7 +2315,7 @@ def create_gradio_interface():
         enable_diagnostics_cb.change(lambda x: setattr(app.diagnostics_logger, 'enabled', x), [enable_diagnostics_cb], None)
 
         def update_vlm_config_options(mode):
-            """Update VLM configuration based on selected mode"""
+            """Update VLM configuration based on user selection"""
             app.config.skip_vlm = (mode == "skip")
             app.config.vlm_text_only_mode = (mode == "text_only")
             if app.config.skip_vlm and app.vlm_handler and app.vlm_handler.model:
@@ -2270,7 +2327,7 @@ def create_gradio_interface():
 
         if torch.cuda.is_available():
             def trigger_gpu_status_update():
-                """Trigger GPU status update for real-time monitoring"""
+                """Update GPU status display"""
                 return get_gpu_status_str()
 
             # GPU status timer for Gradio 5 compatibility
@@ -2278,7 +2335,7 @@ def create_gradio_interface():
             gpu_timer.tick(trigger_gpu_status_update, inputs=None, outputs=[gpu_status])
 
             def handle_clear_gpu_btn_click():
-                """Handle manual GPU memory clearing"""
+                """Handle GPU memory clearing"""
                 gc.collect()
                 torch.cuda.empty_cache()
                 torch.cuda.synchronize()
@@ -2292,7 +2349,7 @@ def create_gradio_interface():
 # ===========================================
 
 if __name__ == "__main__":
-    # Environment setup for optimal performance
+    # Environment setup
     os.environ["TOKENIZERS_PARALLELISM"] = "false"
     if torch.cuda.is_available():
         os.environ['PYTORCH_CUDA_ALLOC_CONF'] = 'expandable_segments:True'
@@ -2304,6 +2361,20 @@ if __name__ == "__main__":
     print(f"FAISS Available: {FAISS_AVAILABLE}")
     print("📊 Embedding Model: NovaSearch/stella_en_400M_v5")
     print("🌙 VLM Model: Moondream 2B (4-bit quantized)")
+    print("🤖 LLM: Dynamic selection with support for Gemma 3 4B and Qwen 3 8B")
+    print("✨ Features: Map-Reduce Summarization, Multi-File Upload, Streaming Output, Diagnostics")
+    print("🧠 Thinking Mode: Available for Qwen models with automatic tag extraction")
+    print("🔧 DEBUG MODE: Type 'debug: your question' in chat or use the debug panel")
+    print("")
+    print("🔧 KEY IMPROVEMENTS:")
+    print("   • Optimized FAISS L2 distance score interpretation (lower scores = better matches)")
+    print("   • Enhanced document filtering logic for better relevance")
+    print("   • Improved chunking strategy for superior context preservation")
+    print("   • Better score normalization and adaptive thresholds")
+    print("   • Enhanced debug output with proper score understanding")
+    print("   • Comprehensive error handling and fallback mechanisms")
+    print("")
+
     gradio_app = create_gradio_interface()
     gradio_app.queue().launch(
         server_name="0.0.0.0", server_port=8855, share=True, show_error=True
