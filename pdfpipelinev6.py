@@ -2278,6 +2278,19 @@ if __name__ == "__main__":
     print(f"FAISS Available: {FAISS_AVAILABLE}")
     print("📊 Embedding Model: NovaSearch/stella_en_400M_v5")
     print("🌙 VLM Model: Moondream 2B (4-bit quantized)")
+    print("🤖 LLM: Dynamic selection with support for Gemma 3 4B and Qwen 3 8B")
+    print("✨ Features: Map-Reduce Summarization, Multi-File Upload, Streaming Output, Diagnostics")
+    print("🧠 Thinking Mode: Available for Qwen models with automatic tag extraction")
+    print("🔧 DEBUG MODE: Type 'debug: your question' in chat or use the debug panel")
+    print("")
+    print("🔧 MAJOR FIXES APPLIED:")
+    print("   • FIXED: FAISS L2 distance score interpretation (lower = better)")
+    print("   • FIXED: Document filtering logic that was removing relevant documents")
+    print("   • FIXED: Improved chunking strategy for better context preservation")
+    print("   • FIXED: Better score normalization and thresholds")
+    print("   • FIXED: Enhanced debug output with proper score understanding")
+    print("")
+
     gradio_app = create_gradio_interface()
     gradio_app.queue().launch(
         server_name="0.0.0.0", server_port=8855, share=True, show_error=True
