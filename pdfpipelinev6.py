@@ -909,16 +909,33 @@ class PDFComparisonEngine:
             response = self.llm.complete(final_prompt)
             full_response_text = str(response)
 
-            if self.config.thinking_mode and self.config.current_llm_model in AVAILABLE_LLMS:
-                model_config = AVAILABLE_LLMS[self.config.current_llm_model]
-                if model_config.get('supports_thinking', False):
-                    thinking_content, main_content = self.thinking_handler.extract_thinking(full_response_text)
-                    if thinking_content:
-                        streaming_handler.put(f"💭 Thinking:\n{thinking_content}\n\n")
-                    streaming_handler.put(main_content)
+        # FIXED: Always extract thinking content for models that support it, regardless of thinking mode setting
+        if self.config.current_llm_model in AVAILABLE_LLMS:
+            model_config = AVAILABLE_LLMS[self.config.current_llm_model]
+            if model_config.get('supports_thinking', False):
+                # Always extract thinking tags to clean the response
+                extracted_thinking, cleaned_response = self.thinking_handler.extract_thinking(full_response_text)
+                
+                # If we were streaming, we need to clear and re-send the cleaned content
+                if self.config.enable_streaming and hasattr(self.llm, 'stream_complete'):
+                    # For streaming, the response might already contain thinking tags mixed in
+                    # We need to process it properly
+                    if extracted_thinking and self.config.thinking_mode:
+                        streaming_handler.put(f"\n\n💭 Thinking:\n{extracted_thinking}\n\n")
+                    if cleaned_response:
+                        streaming_handler.put(cleaned_response)
                 else:
-                    streaming_handler.put(full_response_text)
+                    # For non-streaming, we can process normally
+                    if extracted_thinking and self.config.thinking_mode:
+                        streaming_handler.put(f"💭 Thinking:\n{extracted_thinking}\n\n")
+                    streaming_handler.put(cleaned_response)
             else:
+                # Model doesn't support thinking, use response as-is
+                if not (self.config.enable_streaming and hasattr(self.llm, 'stream_complete')):
+                    streaming_handler.put(full_response_text)
+        else:
+            # Unknown model, use response as-is
+            if not (self.config.enable_streaming and hasattr(self.llm, 'stream_complete')):
                 streaming_handler.put(full_response_text)
 
         streaming_handler.stop()
@@ -970,7 +987,7 @@ class EnhancedQueryEngine:
         self.llm = llm
 
     def query_with_sources_optimized(self, query: str, selected_docs: Optional[List[str]] = None,
-                                     chat_history_str: str = "") -> Tuple[str, List[Dict], Optional[str]]:
+                                    chat_history_str: str = "") -> Tuple[str, List[Dict], Optional[str]]:
         """FIXED: Proper FAISS L2 score handling and improved document filtering"""
         if not selected_docs:
             selected_docs = self.doc_manager.get_all_documents()
@@ -1114,22 +1131,22 @@ class EnhancedQueryEngine:
         # ENHANCED: More direct and effective system prompt
         system_prompt = """You are a knowledgeable assistant. Use the provided context to answer the user's question comprehensively and accurately.
 
-Instructions:
-- Use the information from the context to provide a detailed, helpful answer
-- If the context contains relevant information, use it to respond thoroughly
-- Be specific and reference details from the context when appropriate
-- If you can partially answer from the context, do so and indicate what aspects you can address"""
+    Instructions:
+    - Use the information from the context to provide a detailed, helpful answer
+    - If the context contains relevant information, use it to respond thoroughly
+    - Be specific and reference details from the context when appropriate
+    - If you can partially answer from the context, do so and indicate what aspects you can address"""
 
         user_content = f"""Context from documents:
 
-{context_str}
+    {context_str}
 
-Previous conversation (if any):
-{chat_history_str}
+    Previous conversation (if any):
+    {chat_history_str}
 
-Question: {original_query}
+    Question: {original_query}
 
-Answer based on the provided context:"""
+    Answer based on the provided context:"""
 
         final_prompt_for_llm = self.prompt_builder.get_prompt(user_content, system_prompt)
         
@@ -1138,12 +1155,18 @@ Answer based on the provided context:"""
         response = self.llm.complete(final_prompt_for_llm)
         response_text = str(response)
 
-        # Extract thinking if present
+        # FIXED: Always extract thinking content for models that support it, regardless of thinking mode setting
         thinking_content = None
-        if self.config.thinking_mode and self.config.current_llm_model in AVAILABLE_LLMS:
+        if self.config.current_llm_model in AVAILABLE_LLMS:
             model_config = AVAILABLE_LLMS[self.config.current_llm_model]
             if model_config.get('supports_thinking', False):
-                thinking_content, response_text = self.thinking_handler.extract_thinking(response_text)
+                # Always extract thinking tags to clean the response
+                extracted_thinking, cleaned_response = self.thinking_handler.extract_thinking(response_text)
+                response_text = cleaned_response  # Use cleaned response regardless of thinking mode
+                
+                # Only set thinking_content if thinking mode is enabled
+                if self.config.thinking_mode:
+                    thinking_content = extracted_thinking
 
         # FIXED: Better fallback handling
         if self._is_unhelpful_response(response_text) and len(context_str) > 200:
@@ -1159,15 +1182,21 @@ Answer based on the provided context:"""
             if best_content:
                 direct_prompt = f"""Based on this specific information:
 
-{best_content}
+    {best_content}
 
-Question: {original_query}
+    Question: {original_query}
 
-Provide a direct answer using the information above:"""
+    Provide a direct answer using the information above:"""
                 
                 final_direct_prompt = self.prompt_builder.get_prompt(direct_prompt)
                 alternative_response = self.llm.complete(final_direct_prompt)
                 alternative_text = str(alternative_response)
+                
+                # FIXED: Also clean alternative response for thinking models
+                if self.config.current_llm_model in AVAILABLE_LLMS:
+                    model_config = AVAILABLE_LLMS[self.config.current_llm_model]
+                    if model_config.get('supports_thinking', False):
+                        _, alternative_text = self.thinking_handler.extract_thinking(alternative_text)
                 
                 if not self._is_unhelpful_response(alternative_text):
                     response_text = alternative_text
@@ -1185,7 +1214,7 @@ Provide a direct answer using the information above:"""
         return any(phrase in response.lower() for phrase in unhelpful_phrases)
 
     def chat_streaming(self, message: str, selected_docs: List[str],
-                       streaming_handler: StreamingHandler, chat_history_list: List[Tuple[str, str]]):
+                    streaming_handler: StreamingHandler, chat_history_list: List[Tuple[str, str]]):
 
         # Convert chat history to string for the LLM context
         chat_history_str = "\n".join([f"User: {q}\nAssistant: {a}" for q, a in chat_history_list[-3:]])  # Limit history
@@ -1200,9 +1229,13 @@ Provide a direct answer using the information above:"""
                 time.sleep(0.001)
             streaming_handler.put("\n\n📝 Response:\n")
 
-        for char_or_word in response_text.split(' '): # Simple space split for streaming
-            streaming_handler.put(char_or_word + ' ')
-            time.sleep(0.02) # Simulate streaming delay
+        # FIXED: Check if response_text is not empty before streaming
+        if response_text and response_text.strip():
+            for char_or_word in response_text.split(' '): # Simple space split for streaming
+                streaming_handler.put(char_or_word + ' ')
+                time.sleep(0.02) # Simulate streaming delay
+        else:
+            streaming_handler.put("I couldn't generate a response. Please try rephrasing your question.")
 
         if sources:
             streaming_handler.put("\n\n📚 **Sources:**\n")
@@ -2245,19 +2278,6 @@ if __name__ == "__main__":
     print(f"FAISS Available: {FAISS_AVAILABLE}")
     print("📊 Embedding Model: NovaSearch/stella_en_400M_v5")
     print("🌙 VLM Model: Moondream 2B (4-bit quantized)")
-    print("🤖 LLM: Dynamic selection with support for Gemma 3 4B and Qwen 3 8B")
-    print("✨ Features: Map-Reduce Summarization, Multi-File Upload, Streaming Output, Diagnostics")
-    print("🧠 Thinking Mode: Available for Qwen models with automatic tag extraction")
-    print("🔧 DEBUG MODE: Type 'debug: your question' in chat or use the debug panel")
-    print("")
-    print("🔧 MAJOR FIXES APPLIED:")
-    print("   • FIXED: FAISS L2 distance score interpretation (lower = better)")
-    print("   • FIXED: Document filtering logic that was removing relevant documents")
-    print("   • FIXED: Improved chunking strategy for better context preservation")
-    print("   • FIXED: Better score normalization and thresholds")
-    print("   • FIXED: Enhanced debug output with proper score understanding")
-    print("")
-
     gradio_app = create_gradio_interface()
     gradio_app.queue().launch(
         server_name="0.0.0.0", server_port=8855, share=True, show_error=True
