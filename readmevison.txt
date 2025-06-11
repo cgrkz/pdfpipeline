@@ -1,3 +1,6 @@
+
+pip install -r visreq.txt
+
 # 🧠 Qwen2.5-VL Inference App
 
 This project sets up a visual-language inference pipeline using [Qwen2.5-VL](https://huggingface.co/Qwen/Qwen2.5-VL-7B-Instruct) — an advanced multimodal model from Alibaba's Qwen team. It allows image + text input and generates language-rich outputs.
